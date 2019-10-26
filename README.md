@@ -13,12 +13,26 @@ Website that allows users to view property deals and calculate what are the best
 ## Features
 
 * Current real estate data
+  * Property Details
+  * Schools near by
+  * Business near by
+  * Sales History
+  * Persist data in database
 
 * Calculators
+  * BRRRR Strategy
+  * 70% Rule
+  * Rental Property
+  * Rehab Estimator
+  * Mortgage Payment
 
 * Reports
+  * Page to view report
+  * Pdf report of the property deal
 
 * Page to see property deals
+  * Ability to filter between deals
+  * Ability to add a property ++
 
 ## Milestone List
 
