@@ -20,6 +20,7 @@ Website that allows users to view property deals and calculate what are the best
   * Persist data in database
 
 * Calculators
+  * 1% Rule
   * 70% Rule
   
 * Reports
