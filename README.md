@@ -20,12 +20,8 @@ Website that allows users to view property deals and calculate what are the best
   * Persist data in database
 
 * Calculators
-  * BRRRR Strategy
   * 70% Rule
-  * Rental Property
-  * Rehab Estimator
-  * Mortgage Payment
-
+  
 * Reports
   * Page to view report
   * Pdf report of the property deal
@@ -39,6 +35,14 @@ Website that allows users to view property deals and calculate what are the best
 1. Fetch data from Real Estate API
 
 2. Create database to persist property details.
+ * MLS Number
+ * Street
+ * Zip Code
+ * House Price
+ * Bedrooms
+ * Baths
+ * Property Square Feet
+ * Repairs Needed
 
 3. Create calculators to find best deals
 
