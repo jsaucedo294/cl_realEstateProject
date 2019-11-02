@@ -1,6 +1,6 @@
 using System;
 
-namespace clRealEstateProject.Models
+namespace realEstateProject.Models
 {
     public class ErrorViewModel
     {
