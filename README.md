@@ -12,32 +12,32 @@ Website that allows users to view property deals and calculate what are the best
 
 ## Features
 
-* ###Current real estate data
+* Current real estate data
   * Property Details
   * Schools near by
   * Business near by
   * Sales History
   * Persist data in database
 
-* ###Calculators
+* Calculators
   * Property Rental
    - Calculate CAP Rate (Capitalization Rate)
    - Calculate NOI (Net Operating Income)
    - Calculate COC (Cash On Cash return)
   
-* ###Reports
+* Reports
   * Page to view report
   * Pdf report of the property deal
 
-* ###Page to see property deals
+* Page to see property deals
   * Ability to filter between deals
   * Ability to add a property ++
 
 ## Milestone List
 
-1. ###Fetch data from Real Estate API
+1. Fetch data from Real Estate API
 
-2. ###Create database to persist property details.
+2. Create database to persist property details.
  * MLS Number
  * Street
  * Zip Code
@@ -47,6 +47,6 @@ Website that allows users to view property deals and calculate what are the best
  * Property Square Feet
  * Repairs Needed
 
-3. ###Create calculators to find best deals
+3. Create calculators to find best deals
 
-4. ###Create page to view property deals
+4. Create page to view property deals
