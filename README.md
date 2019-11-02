@@ -20,8 +20,10 @@ Website that allows users to view property deals and calculate what are the best
   * Persist data in database
 
 * Calculators
-  * 1% Rule
-  * 70% Rule
+  * Property Rental
+   - Calculate CAP Rate (Capitalization Rate)
+   - Calculate NOI (Net Operating Income)
+   - Calculate COC (Cash On Cash return)
   
 * Reports
   * Page to view report
