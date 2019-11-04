@@ -35,9 +35,9 @@ Website that allows users to view property deals and calculate what are the best
 
 ## Milestone List
 
-1. Fetch data from Real Estate API
+1. Fetch data from Real Estate API (Week 4)
 
-2. Create database to persist property details.
+2. Create database to persist property details. (Week 5)
  * MLS Number
  * Street
  * Zip Code
@@ -47,6 +47,6 @@ Website that allows users to view property deals and calculate what are the best
  * Property Square Feet
  * Repairs Needed
 
-3. Create calculators to find best deals
+3. Create calculators to find best deals (Week 6)
 
-4. Create page to view property deals
+4. Create page to view property deals (Week 7)
