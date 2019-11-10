@@ -9,7 +9,7 @@ namespace realEstate.Data
 {
     public static class PropertyProcessor
     {
-        public static async Task<REIProperty> GetPropertiesForSale()
+        public static List<REIProperty> GetPropertiesForSale()
         {
             /*
            *&city=louisville&childtype=neighborhood
@@ -28,11 +28,11 @@ namespace realEstate.Data
             string url = builder.ToString();
 
 
-            using (HttpResponseMessage response = await ApiHelper.ApiClient.GetAsync(url))
+            using (var response = ApiHelper.ApiClient.GetAsync(url).Result)
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    PropertyModel property = await response.Content.ReadAsAsync<PropertyModel>();
+                    PropertyModel property = response.Content.ReadAsAsync<PropertyModel>().Result;
                     return property.Property;
                 }
                 else

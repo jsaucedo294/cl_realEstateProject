@@ -12,19 +12,12 @@ namespace realEstate.Controllers
     {
         public ActionResult Index()
         {
-            using (var context = new Context())
-            {
 
-                var propertyInfo = PropertyProcessor.GetPropertiesForSale().Result;
+                ApiHelper.InitializeClient("json");
+                var propertyInfo = PropertyProcessor.GetPropertiesForSale();
+     
                 
-                context.REIProperties.Add(propertyInfo);
-                
-
-                var reiProperties = context.REIProperties.ToList();
-
-                
-                return View(reiProperties);
-            }
+                return View(propertyInfo);
 
         }
 

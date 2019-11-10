@@ -1,6 +1,12 @@
-﻿@model realEstate.Models.REIProperty
+﻿@model List<realEstate.Models.REIProperty>
 @{
     ViewBag.Title = "Home Page";
 }
 
-<h1>@Model.Address.Line1</h1>
+
+    <ul>
+        @foreach (var property in Model)
+        {
+            <li>@property.Address.Line1</li>
+        }
+    </ul>

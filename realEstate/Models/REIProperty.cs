@@ -8,6 +8,7 @@ namespace realEstate.Models
 {
     public class REIProperty
     {
+        public int Id { get; set; }
         public AddressModel Address { get; set; }
 
     }

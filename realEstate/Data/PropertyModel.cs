@@ -8,6 +8,6 @@ namespace realEstate.Data
 {
     public class PropertyModel
     {
-        public REIProperty Property { get; set; }
+        public List<REIProperty> Property { get; set; }
     }
 }
