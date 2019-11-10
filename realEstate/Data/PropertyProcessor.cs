@@ -43,5 +43,50 @@ namespace realEstate.Data
 
 
         }
+
+        public static List<int> getZpidOfProperties()
+        {
+            List<int> zpidOfProperties = null;
+
+            ApiHelper.InitializeClient("json");
+            var propertyInfo = PropertyProcessor.GetPropertiesForSale();
+
+            ApiHelper.InitializeClient("xml");
+
+            var builder = new UriBuilder("http://www.zillow.com/webservice/GetSearchResults.htm?");
+            var query = HttpUtility.ParseQueryString(builder.Query);
+
+            foreach (var property in propertyInfo)
+            {
+                query["address"] = property.Address.Line1;
+                query["citystatezip"] = $"{ property.Address.Locality}, { property.Address.CountrySubd }";
+
+                builder.Query = query.ToString();
+                string url = builder.ToString();
+
+                using (var response = ApiHelper.ApiClient.GetAsync(url).Result)
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        //TODO: I need to get the zpids from Zillow so I can get the property data from the other Zillow url that requires zpid.
+                        // Use the code example that Matt gave you in Slack. You need to convert the xml and get the zpids.
+                        PropertyModel zpid = response.Content.ReadAsAsync<PropertyModel>().Result;
+                        zpidOfProperties.Add(zpid.Property);
+                    }
+                    else
+                    {
+                        throw new Exception(response.ReasonPhrase);
+                    }
+                }
+
+            }
+
+
+            return zpidOfProperties;
+
+
+            
+
+        }
     }
 }

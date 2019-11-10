@@ -26,6 +26,7 @@ namespace realEstate.Data
             else if (responseFormat == "xml")
             {
                 ApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+                ApiClient.DefaultRequestHeaders.Add("zws-id", "ZWz1hgn3c1uknf_7yjzz");
             }
 
         }
