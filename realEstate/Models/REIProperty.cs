@@ -15,7 +15,7 @@ namespace realEstate.Models
         public DateTime LastUpdated { get; set; }
         public List<string> Images { get; set; }
 
-        public HomeDetails HomeDetails { get; set; }
+        public HomeDetailsModel HomeDetails { get; set; }
 
 
     }

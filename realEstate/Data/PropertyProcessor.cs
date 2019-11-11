@@ -32,7 +32,7 @@ namespace realEstate.Data
             builder.Query = query.ToString();
             string url = builder.ToString();
 
-
+            ApiHelper.InitializeClient("json");
             using (var response = ApiHelper.ApiClient.GetAsync(url).Result)
             {
                 if (response.IsSuccessStatusCode)
@@ -49,7 +49,7 @@ namespace realEstate.Data
                         Dictionary<string, string> propertyAddress = new Dictionary<string, string>();
                         propertyAddress.Add("address", line1);
                         propertyAddress.Add("citystatezip", line2);
-                        Console.WriteLine($"{line1} {line2} has been added...");
+
                         addressesForSale.Add(propertyAddress);
                     }
                    
@@ -64,9 +64,10 @@ namespace realEstate.Data
 
         }
 
-        public static List<int> getZpidOfProperties()
+        public static List<Dictionary<string, int>> getZpidOfProperties()
         {
-            List<int> zpidOfProperties = null;
+            List<Dictionary<string, int>> zpidOfPropertiesList = new List<Dictionary<string, int>>();
+            Dictionary<string, int> PropertyZpidAndPrice = new Dictionary<string, int>();
 
             ApiHelper.InitializeClient("json");
             var propertyInfo = PropertyProcessor.GetPropertiesForSale();
@@ -78,6 +79,7 @@ namespace realEstate.Data
 
             foreach (var property in propertyInfo)
             {
+                query["zws-id"] = "X1-ZWz1hgn3c1uknf_7yjzz";
                 query["address"] = property["address"];
                 query["citystatezip"] = property["citystatezip"];
 
@@ -88,16 +90,23 @@ namespace realEstate.Data
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        //TODO: I need to get the zpids from Zillow so I can get the property data from the other Zillow url that requires zpid.
-                        // Use the code example that Matt gave you in Slack. You need to convert the xml and get the zpids.
                         var xmlResponse = response.Content.ReadAsStringAsync().Result;
                         var xmlNode = new XmlDocument();
                         xmlNode.LoadXml(xmlResponse);
+                        // Find a way I can deserialize xml to an object, so I'm able to access to zpid and price amount
                         var jsonText = JsonConvert.SerializeXmlNode(xmlNode);
-                        Console.WriteLine(jsonText);
-                        JObject objResult = JObject.Parse(jsonText);
                         
-                       
+                        JObject objResult = JObject.Parse(jsonText);
+
+                        // Populate zpid location on objResult and price amount
+
+                        int zpidProperty = int.Parse(objResult["SearchResults:searchresults"]["response"]["results"]["result"]["zpid"].ToString());
+                        int priceAmount = int.Parse(objResult["SearchResults:searchresults"]["response"]["results"]["result"]["zestimate"]["amount"]["#text"].ToString());
+                        PropertyZpidAndPrice.Add("zpid", zpidProperty);
+                        PropertyZpidAndPrice.Add("priceAmount", priceAmount);
+
+                        // Populate List with zpid and price amount Dictionary
+                        zpidOfPropertiesList.Add(PropertyZpidAndPrice);
                     }
                     else
                     {
@@ -107,11 +116,12 @@ namespace realEstate.Data
 
             }
 
-            return zpidOfProperties;
+            return zpidOfPropertiesList;
         }
 
         public static List<REIProperty> GetPropertiesDetailsForSale()
         {
+            List<REIProperty> properties = new List<REIProperty>();
             ApiHelper.InitializeClient("xml");
             var zpids = PropertyProcessor.getZpidOfProperties();
 
@@ -120,7 +130,7 @@ namespace realEstate.Data
 
             foreach (var zpid in zpids)
             {
-                query["zpid"] = zpid.ToString();
+                query["zpid"] = zpid["zpid"].ToString();
                 builder.Query = query.ToString();
 
                 string url = builder.ToString();
@@ -139,7 +149,7 @@ namespace realEstate.Data
                         JObject objResult = JObject.Parse(jsonText);
 
                         REIProperty property = new REIProperty();
-                        property.
+                      
 
                     }
                     else
@@ -149,6 +159,7 @@ namespace realEstate.Data
                 }
 
             }
+            return properties;
         }
     }
 }

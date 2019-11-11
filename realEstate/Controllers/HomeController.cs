@@ -12,9 +12,7 @@ namespace realEstate.Controllers
     {
         public ActionResult Index()
         {
-
-                ApiHelper.InitializeClient("json");
-                var propertyInfo = PropertyProcessor.GetPropertiesForSale();
+                var propertyInfo = PropertyProcessor.GetPropertiesDetailsForSale();
      
                 
                 return View(propertyInfo);

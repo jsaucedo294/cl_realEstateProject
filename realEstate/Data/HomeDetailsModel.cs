@@ -18,7 +18,15 @@ namespace realEstate.Data
         public string BasementCondition { get; set; }
         public string RoofType { get; set; }
         public string ExteriorMaterial { get; set; }
-        //TODO: Finish home details properties
+
+        public string HeatingSystem { get; set; }
+        public string CoolingSystem { get; set; }
+        public string Appliances { get; set; }
+
+        public string HomeDescription { get; set; }
+
+        public string WhatOwnerLoves { get; set; }
+
 
     }
 }
