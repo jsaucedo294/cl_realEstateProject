@@ -143,12 +143,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Data\AddressModel.cs" />
+    <Compile Include="Data\APIKeys.cs" />
+    <Compile Include="Data\APIKeysTemplate.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\ApiHelper.cs" />
-    <Compile Include="Data\HomeDetailsModel.cs" />
-    <Compile Include="Data\PropertyModel.cs" />
+    <Compile Include="Data\GetSearchResults.cs" />
     <Compile Include="Data\PropertyProcessor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
