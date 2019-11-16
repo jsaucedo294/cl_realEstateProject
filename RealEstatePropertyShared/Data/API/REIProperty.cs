@@ -12,13 +12,12 @@ namespace RealEstatePropertyShared.Models
         [JsonProperty("UpdatedPropertyDetails:updatedPropertyDetails")]
         public UpdatedPropertyDetailsUpdatedPropertyDetails UpdatedPropertyDetails { get; set; }
     }
-
-    public class RequestThird
+public class Request
     {
         public string zpid { get; set; }
     }
 
-    public class MessageThird
+    public class Message
     {
         public string text { get; set; }
         public string code { get; set; }
@@ -30,7 +29,7 @@ namespace RealEstatePropertyShared.Models
         public string total { get; set; }
     }
 
-    public class AddressThird
+    public class Address
     {
         public string street { get; set; }
         public string zipcode { get; set; }
@@ -40,7 +39,7 @@ namespace RealEstatePropertyShared.Models
         public string longitude { get; set; }
     }
 
-    public class LinksThird
+    public class Links
     {
         public string homeDetails { get; set; }
         public string photoGallery { get; set; }
@@ -60,7 +59,6 @@ namespace RealEstatePropertyShared.Models
 
     public class EditedFacts
     {
-        public int price { get; set; }
         public string useCode { get; set; }
         public string bedrooms { get; set; }
         public string bathrooms { get; set; }
@@ -76,13 +74,14 @@ namespace RealEstatePropertyShared.Models
         public string coolingSystem { get; set; }
         public string floorCovering { get; set; }
         public string architecture { get; set; }
-
         public string basement { get; set; }
-        public string appliances { get; set; }
         public string numFloors { get; set; }
+        public int price { get; set; }
+        public string appliances { get; set; }
+
     }
 
-    public class ResponseThird
+    public class Response
     {
         public string zpid { get; set; }
         public PageViewCount pageViewCount { get; set; }
@@ -96,8 +95,10 @@ namespace RealEstatePropertyShared.Models
 
     public class UpdatedPropertyDetailsUpdatedPropertyDetails
     {
-        public RequestThird request { get; set; }
-        public MessageThird message { get; set; }
-        public ResponseThird response { get; set; }
+        public Request request { get; set; }
+        public Message message { get; set; }
+        public Response response { get; set; }
     }
+
+
 }

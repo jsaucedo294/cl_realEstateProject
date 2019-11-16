@@ -26,6 +26,7 @@ namespace RealEstatePropertyShared.Data
             Context.SaveChanges();
         }
 
+
         public void Update(TEntity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;

@@ -88,16 +88,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\ApiHelper.cs" />
-    <Compile Include="Data\APIKeys.cs" />
-    <Compile Include="Data\APIKeysTemplate.cs" />
-    <Compile Include="Data\BaseRepository.cs" />
+    <Compile Include="Data\API\ApiHelper.cs" />
+    <Compile Include="Data\API\APIKeys.cs" />
+    <Compile Include="Data\API\APIKeysTemplate.cs" />
+    <Compile Include="Data\Repository\BaseRepository.cs" />
     <Compile Include="Data\Context.cs" />
-    <Compile Include="Data\GetSearchResults.cs" />
-    <Compile Include="Data\PropertyProcessor.cs" />
-    <Compile Include="Data\REIPropertiesRepository.cs" />
-    <Compile Include="Data\Repository.cs" />
-    <Compile Include="Models\REIProperty.cs" />
+    <Compile Include="Data\API\GetSearchResults.cs" />
+    <Compile Include="Data\API\ProcessData.cs" />
+    <Compile Include="Data\Repository\REIPropertiesRepository.cs" />
+    <Compile Include="Data\Repository\Repository.cs" />
+    <Compile Include="Data\API\REIProperty.cs" />
+    <Compile Include="Models\RealEstateProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

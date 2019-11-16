@@ -11,35 +11,6 @@ namespace RealEstatePropertyShared.Data
         [JsonProperty("SearchResults:searchresults")]
         public SearchResultsSearchresults SearchResults { get; set; }
     }
-    public class Request
-    {
-        public string address { get; set; }
-        public string citystatezip { get; set; }
-    }
-
-    public class Message
-    {
-        public string text { get; set; }
-        public string code { get; set; }
-    }
-
-    public class Links
-    {
-        public string homedetails { get; set; }
-        public string graphsanddata { get; set; }
-        public string mapthishome { get; set; }
-        public string comparables { get; set; }
-    }
-
-    public class Address
-    {
-        public string street { get; set; }
-        public string zipcode { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string latitude { get; set; }
-        public string longitude { get; set; }
-    }
 
     public class Amount
     {
@@ -84,8 +55,6 @@ namespace RealEstatePropertyShared.Data
     public class Result
     {
         public string zpid { get; set; }
-        public Links links { get; set; }
-        public Address address { get; set; }
         public Zestimate zestimate { get; set; }
     }
 

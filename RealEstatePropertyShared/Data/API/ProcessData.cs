@@ -10,8 +10,9 @@ using System.Xml;
 
 namespace RealEstatePropertyShared.Data
 {
-    public static class PropertyProcessor
+    public static class ProcessData
     {
+
         public static List<Dictionary<string, string>> GetPropertiesForSale()
         {
             /*
@@ -70,7 +71,7 @@ namespace RealEstatePropertyShared.Data
             
 
             ApiHelper.InitializeClient("json");
-            var propertyInfo = PropertyProcessor.GetPropertiesForSale();
+            var propertyInfo = ProcessData.GetPropertiesForSale();
 
             ApiHelper.InitializeClient("xml");
 
@@ -139,11 +140,11 @@ namespace RealEstatePropertyShared.Data
             return zpidOfPropertiesList;
         }
 
-        public static List<REIProperty> GetPropertiesDetailsForSale()
+        public static List<RealEstateProperty> GetPropertiesDetailsForSale()
         {
-            List<REIProperty> properties = new List<REIProperty>();
+            List<RealEstateProperty> properties = new List<RealEstateProperty>();
             ApiHelper.InitializeClient("xml");
-            var listOfZpidAndPrices = PropertyProcessor.getZpidOfProperties();
+            var listOfZpidAndPrices = ProcessData.getZpidOfProperties();
 
 
             var builder = new UriBuilder("http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?");
@@ -178,10 +179,65 @@ namespace RealEstatePropertyShared.Data
 
                             reiProperty.UpdatedPropertyDetails.response.editedFacts.price = itemDictionary["zpid"];
 
-                            properties.Add(reiProperty);
+                            List<string> images = new List<string>();
+                            foreach (var image in reiProperty.UpdatedPropertyDetails.response.images.image.url)
+                            {
+                                images.Add(image);
+                            }
 
+                            var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.zpid);
+                            var street = reiProperty.UpdatedPropertyDetails.response.address.street;
+                            var city = reiProperty.UpdatedPropertyDetails.response.address.city;
+                            var state = reiProperty.UpdatedPropertyDetails.response.address.state;
+                            var latitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.latitude);
+                            var longitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.longitude);
+                            var propertyType = reiProperty.UpdatedPropertyDetails.response.editedFacts.useCode;
+                            var bedrooms = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.bedrooms);
+                            var bathdrooms = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.bathrooms);
+                            var finishedSqFt = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.finishedSqFt);
+                            var lotSizeSqFt = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.lotSizeSqFt);
+                            var numRooms = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.numRooms);
+                            var roof = reiProperty.UpdatedPropertyDetails.response.editedFacts.roof;
+                            var exteriorMaterial = reiProperty.UpdatedPropertyDetails.response.editedFacts.exteriorMaterial;
+                            var parkingType = reiProperty.UpdatedPropertyDetails.response.editedFacts.parkingType;
+                            var heatingSystem = reiProperty.UpdatedPropertyDetails.response.editedFacts.heatingSystem;
+                            var coolingSystem = reiProperty.UpdatedPropertyDetails.response.editedFacts.coolingSystem;
+                            var floorCovering = reiProperty.UpdatedPropertyDetails.response.editedFacts.floorCovering;
+                            var architecture = reiProperty.UpdatedPropertyDetails.response.editedFacts.architecture;
+                            var basement = reiProperty.UpdatedPropertyDetails.response.editedFacts.basement;
+                            var numFloors = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.numFloors);
+                            var homeDescription = reiProperty.UpdatedPropertyDetails.response.homeDescription;
 
+                            RealEstateProperty _property = new RealEstateProperty()
+                            {
+                                Zpid = zpid,
+                                Street = street,
+                                City = city,
+                                State = state,
+                                Latitude = latitude,
+                                Longitude = longitude,
+                                Price = reiProperty.UpdatedPropertyDetails.response.editedFacts.price,
+                                PropertyType = propertyType,
+                                Bedrooms = bedrooms,
+                                Bathrooms = bathdrooms,
+                                FinishedSqFt = finishedSqFt,
+                                LotSizeSqFt = lotSizeSqFt,
+                                NumRooms = numRooms,
+                                Roof = roof,
+                                ExterialMaterial = exteriorMaterial,
+                                ParkingType = parkingType,
+                                HeatingSystem = heatingSystem,
+                                CoolingSystem = coolingSystem,
+                                FloorCovering = floorCovering,
+                                Architecture = architecture,
+                                Basement = basement,
+                                Appliances = reiProperty.UpdatedPropertyDetails.response.editedFacts.appliances,
+                                NumFloors = numFloors,
+                                Images = images,
+                                HomeDescription = homeDescription
+                            };
 
+                            properties.Add(_property);
                         }
                     }
                     else
@@ -192,6 +248,36 @@ namespace RealEstatePropertyShared.Data
 
             }
             return properties;
+        }
+
+        public static int checkIfCorrectNumberInput(string value) 
+        {
+            int number;
+            bool success = Int32.TryParse(value, out number);
+            if (success)
+            {
+                return number;
+            }
+            else 
+            {
+                return 0;
+            }
+
+        
+        }
+
+        public static double checkIfCorrectDoubleInput(string value)
+        {
+            double doubleNum;
+            bool successDec = Double.TryParse(value, out doubleNum);
+            if (successDec)
+            {
+                return doubleNum;
+            }
+            else
+            {
+                return 0.0;
+            }
         }
     }
 }
