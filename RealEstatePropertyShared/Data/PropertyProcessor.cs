@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Net.Http;
-using realEstate.Models;
+using RealEstatePropertyShared.Models;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Xml;
 
-namespace realEstate.Data
+namespace RealEstatePropertyShared.Data
 {
     public static class PropertyProcessor
     {

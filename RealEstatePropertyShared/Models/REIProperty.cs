@@ -1,17 +1,18 @@
 ﻿using Newtonsoft.Json;
-using realEstate.Data;
+using RealEstatePropertyShared.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace realEstate.Models
+namespace RealEstatePropertyShared.Models
 {
     public class REIProperty
     {
         [JsonProperty("UpdatedPropertyDetails:updatedPropertyDetails")]
         public UpdatedPropertyDetailsUpdatedPropertyDetails UpdatedPropertyDetails { get; set; }
     }
+
     public class RequestThird
     {
         public string zpid { get; set; }

@@ -1,4 +1,4 @@
-﻿using realEstate.Models;
+﻿using RealEstatePropertyShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web;
 
-namespace realEstate.Data
+namespace RealEstatePropertyShared.Data
 {
     public static class ApiHelper
     {

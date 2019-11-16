@@ -1,11 +1,11 @@
-﻿using realEstate.Models;
+﻿using RealEstatePropertyShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace realEstate
+namespace RealEstatePropertyShared
 {
     public class Context : DbContext
     {
