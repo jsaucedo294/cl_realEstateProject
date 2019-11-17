@@ -9,6 +9,9 @@ namespace RealEstatePropertyShared
 {
     public class Context : DbContext
     {
-        public DbSet<RealEstateProperty> REIProperties { get; set; }
+        public Context() : base("Context")
+        {
+        }
+        public DbSet<RealEstateProperty> RealEstateProperties { get; set; }
     }
 }

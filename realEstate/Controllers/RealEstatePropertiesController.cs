@@ -8,11 +8,11 @@ using System.Web.Mvc;
 
 namespace realEstate.Controllers
 {
-    public class REIPropertiesController : BaseController
+    public class RealEstatePropertiesController : BaseController
     {
         private REIPropertiesRepository _reiPropertiesRepository = null;
 
-        public REIPropertiesController()
+        public RealEstatePropertiesController()
         {
             _reiPropertiesRepository = new REIPropertiesRepository(Context);
         }
