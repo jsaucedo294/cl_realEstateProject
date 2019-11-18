@@ -180,10 +180,21 @@ namespace RealEstatePropertyShared.Data
                             reiProperty.UpdatedPropertyDetails.response.editedFacts.price = itemDictionary["zpid"];
 
                             List<string> images = new List<string>();
-                            foreach (var image in reiProperty.UpdatedPropertyDetails.response.images.image.url)
+                            var imagesUrls = reiProperty.UpdatedPropertyDetails.response.images.image.url;
+                            foreach (var image in imagesUrls)
                             {
-                                images.Add(image);
+                                if (image != null)
+                                {
+                                    images.Add(image);
+                                }
+                                else
+                                {
+                                    images.Add("");
+                                }
+                                
                             }
+                         
+                             
 
                             var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.zpid);
                             var street = reiProperty.UpdatedPropertyDetails.response.address.street;

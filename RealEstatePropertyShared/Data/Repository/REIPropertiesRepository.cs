@@ -15,19 +15,6 @@ namespace RealEstatePropertyShared.Data
         {
         }
 
-        public void Add(List<RealEstateProperty> properties)
-        {
-            /* 
-             TODO: Fix error
-             System.Data.SqlClient.SqlException: 'CREATE FILE encountered operating system error 5(Access is denied.) while attempting to open or create the physical file 
-             'C:\Users\Jorge SaucedoRealEstatePropertyWebApp.mdf'. CREATE DATABASE failed. Some file names listed could not be created. Check related errors.'
-             */
-            properties.ForEach(p => Context.Set<RealEstateProperty>().Add(p));
-                Context.SaveChanges();
-            
-        }
-        
-
         public override RealEstateProperty Get(int id)
         {
             var reiProperty = Context.RealEstateProperties.AsQueryable();
