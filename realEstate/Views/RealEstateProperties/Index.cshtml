@@ -3,22 +3,32 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <section>
+        <div class="container">
+            <div class="row">
 
-    <div class="container">
-        <div class="row">
-            
 
-            @foreach (var property in Model)
-            {
-            <div class="col-md-4">
-                <div class="property-card">
-                   
+                @foreach (var property in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="property-card">
+                            <div class="image-container">
+                                <img src="@property.Images[0]" />
+                            </div>
+                            <div class="property-card-info">
+                                <div class="property-card-info-top">
+                                    <h3>@property.Price</h3>
+                                    <p>@property.Bedrooms bds | @property.Bathrooms ba | @property.FinishedSqFt sqft</p>
+                                </div>
+                                <div class="property-card-info-bottom">
+                                    <h5>@property.Street, @property.City, @property.State @property.Zipcode</h5>
+                                </div>
 
-                    <h2>@property.Zpid</h2>
-                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
             </div>
-            }
-
         </div>
-    </div>
-
+    </section>

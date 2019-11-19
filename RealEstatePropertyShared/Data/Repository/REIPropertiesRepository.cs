@@ -15,13 +15,13 @@ namespace RealEstatePropertyShared.Data
         {
         }
 
-        public override RealEstateProperty Get(int id)
+        public override RealEstateProperty Get(int zpid)
         {
             var reiProperty = Context.RealEstateProperties.AsQueryable();
             
 
             return reiProperty
-                .Where(p => p.Zpid == id)
+                .Where(p => p.Zpid == zpid)
                 .SingleOrDefault();
         }
 

@@ -10,15 +10,19 @@ namespace RealEstatePropertyShared.Models
 {
     public class RealEstateProperty
     {
+        
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int? Zpid { get; set; }
+        public int Zpid { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public int Zipcode { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
-
+        
+        [DataType(DataType.Currency)]
+        [DisplayFormat(NullDisplayText = "n/a", ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
         public int? Price { get; set; }
         public string PropertyType { get; set; }
         public int? Bedrooms { get; set; }
@@ -36,7 +40,22 @@ namespace RealEstatePropertyShared.Models
         public string Basement { get; set; }
         public string Appliances { get; set; }
         public int? NumFloors { get; set; }
-        public List<string> Images { get; set; }
+
+        public string ImagesValues { get; set; }
+        public List<String> Images { get; set; }
+
+        public List<string> Strings
+        {
+            get { return Images; }
+            set { Images = value; }
+        }
+
+        public string ImagesAsString
+        {
+            get { return String.Join(",", Images); }
+            set { Images = value.Split(',').ToList(); }
+        }
+
         public string HomeDescription { get; set; }
 
 

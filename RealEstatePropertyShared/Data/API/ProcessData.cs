@@ -26,7 +26,7 @@ namespace RealEstatePropertyShared.Data
             query["address1"] = "320 IDLEWYLDE DR";
             query["address2"] = "2825 LEXINGTON RD";
             query["radius"] = "20";
-            query["propertytype"] = "DUPLEX";
+            query["propertytype"] = "SFR";
             query["orderby"] = "publisheddate";
             query["page"] = "1";
             query["pagesize"] = "5";
@@ -177,29 +177,21 @@ namespace RealEstatePropertyShared.Data
                             var jsonText = JsonConvert.SerializeXmlNode(xmlNode);
                             var reiProperty = JsonConvert.DeserializeObject<REIProperty>(jsonText);
 
-                            reiProperty.UpdatedPropertyDetails.response.editedFacts.price = itemDictionary["zpid"];
+                            reiProperty.UpdatedPropertyDetails.response.editedFacts.price = itemDictionary["priceAmount"];
 
-                            List<string> images = new List<string>();
-                            var imagesUrls = reiProperty.UpdatedPropertyDetails.response.images.image.url;
-                            foreach (var image in imagesUrls)
-                            {
-                                if (image != null)
-                                {
-                                    images.Add(image);
-                                }
-                                else
-                                {
-                                    images.Add("");
-                                }
-                                
-                            }
-                         
-                             
+                            var images = reiProperty.UpdatedPropertyDetails.response.images?.image.url;
+                            List<string> defaultImage = new List<string>() { "/Content/Images/No_photos_available.png" };
+
+                            //TODO: Images are not being added to RealEstateProperty Model.
+                            // check -> https://stackoverflow.com/questions/20711986/entity-framework-code-first-cant-store-liststring 
+                            
 
                             var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.zpid);
+                            var price = reiProperty.UpdatedPropertyDetails.response.editedFacts.price;
                             var street = reiProperty.UpdatedPropertyDetails.response.address.street;
                             var city = reiProperty.UpdatedPropertyDetails.response.address.city;
                             var state = reiProperty.UpdatedPropertyDetails.response.address.state;
+                            var zipcode = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.address.zipcode);
                             var latitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.latitude);
                             var longitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.longitude);
                             var propertyType = reiProperty.UpdatedPropertyDetails.response.editedFacts.useCode;
@@ -225,9 +217,10 @@ namespace RealEstatePropertyShared.Data
                                 Street = street,
                                 City = city,
                                 State = state,
+                                Zipcode = zipcode,
                                 Latitude = latitude,
                                 Longitude = longitude,
-                                Price = reiProperty.UpdatedPropertyDetails.response.editedFacts.price,
+                                Price = price,
                                 PropertyType = propertyType,
                                 Bedrooms = bedrooms,
                                 Bathrooms = bathdrooms,
@@ -244,10 +237,11 @@ namespace RealEstatePropertyShared.Data
                                 Basement = basement,
                                 Appliances = reiProperty.UpdatedPropertyDetails.response.editedFacts.appliances,
                                 NumFloors = numFloors,
-                                Images = images,
+                                Images = ((images == null) ? defaultImage : images),
                                 HomeDescription = homeDescription
                             };
 
+                            //TODO: Only add RealEstatePropery when is not in database
                             properties.Add(_property);
                         }
                     }
