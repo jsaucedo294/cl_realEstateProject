@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RealEstatePropertyShared.Data
 {
-    public class PropertiesInitializer : DropCreateDatabaseIfModelChanges<Context>
+    internal class PropertiesInitializer : DropCreateDatabaseIfModelChanges<Context>
     {
         protected override void Seed(Context context)
         {
@@ -17,7 +17,6 @@ namespace RealEstatePropertyShared.Data
             propertiesFromAPI.ForEach( p => context.RealEstateProperties.Add(p));
 
             context.SaveChanges();
-            base.Seed(context);
 
         }
 
