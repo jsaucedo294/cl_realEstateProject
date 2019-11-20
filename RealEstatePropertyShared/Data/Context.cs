@@ -1,4 +1,5 @@
-﻿using RealEstatePropertyShared.Models;
+﻿using RealEstatePropertyShared.Data;
+using RealEstatePropertyShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,6 +12,7 @@ namespace RealEstatePropertyShared
     {
         public Context() : base("ContextDb")
         {
+            Database.SetInitializer<Context>(new PropertiesInitializer());
         }
         public DbSet<RealEstateProperty> RealEstateProperties { get; set; }
     }

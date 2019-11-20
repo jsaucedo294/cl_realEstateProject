@@ -23,9 +23,7 @@ namespace RealEstatePropertyShared.Data
             var builder = new UriBuilder("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
-            query["address1"] = "320 IDLEWYLDE DR";
-            query["address2"] = "2825 LEXINGTON RD";
-            query["radius"] = "20";
+            query["postalcode"] = "40206";
             query["propertytype"] = "SFR";
             query["orderby"] = "publisheddate";
             query["page"] = "1";
@@ -187,7 +185,7 @@ namespace RealEstatePropertyShared.Data
                             
 
                             var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.zpid);
-                            var price = reiProperty.UpdatedPropertyDetails.response.editedFacts.price;
+                            var price = Convert.ToDecimal(reiProperty.UpdatedPropertyDetails.response.editedFacts.price);
                             var street = reiProperty.UpdatedPropertyDetails.response.address.street;
                             var city = reiProperty.UpdatedPropertyDetails.response.address.city;
                             var state = reiProperty.UpdatedPropertyDetails.response.address.state;

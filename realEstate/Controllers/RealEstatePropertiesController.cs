@@ -20,16 +20,6 @@ namespace realEstate.Controllers
         // GET: REIProperties
         public ActionResult Index()
         {
-
-            var propertiesFromAPI = ProcessData.GetPropertiesDetailsForSale();
-            foreach (var property in propertiesFromAPI)
-            {
-                if (_reiPropertiesRepository.Get(property.Zpid) == null)
-                {
-                    _reiPropertiesRepository.Add(property);
-                }
-
-            }
             
             var reiProperties = _reiPropertiesRepository.GetList();
 

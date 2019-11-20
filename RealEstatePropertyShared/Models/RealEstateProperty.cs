@@ -23,7 +23,7 @@ namespace RealEstatePropertyShared.Models
         
         [DataType(DataType.Currency)]
         [DisplayFormat(NullDisplayText = "n/a", ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
-        public int? Price { get; set; }
+        public decimal? Price { get; set; }
         public string PropertyType { get; set; }
         public int? Bedrooms { get; set; }
         public double? Bathrooms { get; set; }

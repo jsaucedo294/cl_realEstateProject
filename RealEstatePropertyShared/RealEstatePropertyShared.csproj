@@ -91,6 +91,7 @@
     <Compile Include="Data\API\ApiHelper.cs" />
     <Compile Include="Data\API\APIKeys.cs" />
     <Compile Include="Data\API\APIKeysTemplate.cs" />
+    <Compile Include="Data\PropertiesInitializer.cs" />
     <Compile Include="Data\Repository\BaseRepository.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\API\GetSearchResults.cs" />
