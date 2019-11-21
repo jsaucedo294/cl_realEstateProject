@@ -23,7 +23,7 @@ namespace RealEstatePropertyShared.Models
         
         [DataType(DataType.Currency)]
         [DisplayFormat(NullDisplayText = "n/a", ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
-        public decimal? Price { get; set; }
+        public double? Price { get; set; }
         public string PropertyType { get; set; }
         public int? Bedrooms { get; set; }
         public double? Bathrooms { get; set; }
@@ -58,6 +58,38 @@ namespace RealEstatePropertyShared.Models
 
         public string HomeDescription { get; set; }
 
+        public double? MorgagePerYear => (_rateOfInterest * LoanAmount) / (1 - Math.Pow(1 + _rateOfInterest, _numOfPayments * -1));
+        public double? PropertyTaxPerYear => Price * 0.930 / 100;
+
+        public double? RentPerYear {
+            get 
+            {
+                if (NumRooms > 4)
+                {
+                    return 2000.0 * 12;
+                }
+                else if (NumRooms >= 2)
+                {
+                    return 1000.0 * 12;
+                }
+                else
+                {
+                    return 700.0 * 12;
+                }
+            }
+        }
+        public double? PropertyManagerPerYear => RentPerYear * 0.10;
+        public double? VacancyPerYear => RentPerYear * 0.05;
+
+
+        int _insurance_per_year = 110 * 12;
+        int _repairs_per_year = 100 * 12;
+        double _capital_expenses_per_year = 100 * 12;
+        double _rateOfInterest = 5.0 / 1200;
+        double _numOfPayments = 30 * 12;
+
+        public double? NOI => RentPerYear - (VacancyPerYear + PropertyTaxPerYear + PropertyManagerPerYear + _insurance_per_year + _repairs_per_year + _capital_expenses_per_year);
+        public double? LoanAmount => Price * 0.80;
 
 
     }

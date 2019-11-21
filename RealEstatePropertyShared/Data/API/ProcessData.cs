@@ -187,7 +187,7 @@ namespace RealEstatePropertyShared.Data
                             
 
                             var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.zpid);
-                            var price = Convert.ToDecimal(reiProperty.UpdatedPropertyDetails.response.editedFacts.price);
+                            var price = Convert.ToDouble(reiProperty.UpdatedPropertyDetails.response.editedFacts.price);
                             var street = reiProperty.UpdatedPropertyDetails.response.address.street;
                             var city = reiProperty.UpdatedPropertyDetails.response.address.city;
                             var state = reiProperty.UpdatedPropertyDetails.response.address.state;
