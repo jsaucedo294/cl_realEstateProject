@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Xml;
+using System.Linq;
 
 namespace RealEstatePropertyShared.Data
 {
@@ -65,9 +66,9 @@ namespace RealEstatePropertyShared.Data
 
         }
 
-        public static List<Dictionary<string, int>> getZpidOfProperties()
+        public static List<GetSearchResults> getZpidOfProperties()
         {
-            List<Dictionary<string, int>> zpidOfPropertiesList = new List<Dictionary<string, int>>();
+            List<GetSearchResults> propertyList = new List<GetSearchResults>();
             
 
             ApiHelper.InitializeClient("json");
@@ -80,7 +81,6 @@ namespace RealEstatePropertyShared.Data
 
             foreach (var property in propertyInfo)
             {
-                Dictionary<string, int> PropertyZpidAndPrice = new Dictionary<string, int>();
                 query["zws-id"] = APIKeys.ZillowKey;
                 query["address"] = property["address"];
                 query["citystatezip"] = property["citystatezip"];
@@ -102,32 +102,18 @@ namespace RealEstatePropertyShared.Data
                         var jsonText = JsonConvert.SerializeXmlNode(xmlNode);
 
                        
-                        var resultObj = JsonConvert.DeserializeObject<GetSearchResults>(jsonText);
+                        var propertyObj = JsonConvert.DeserializeObject<GetSearchResults>(jsonText);
 
-                        var result = resultObj.SearchResults.response.results.result;
-                        foreach(var item in result)
-                            {
+                        var result = propertyObj.SearchResults.response.results.result;
 
 
-                            var amount = 0;
-                            if (int.TryParse(item.zestimate.amount.text, out amount))
-                            {
-                                // Populate zpid location on objResult and price amount
-
-                                PropertyZpidAndPrice.Add("priceAmount", amount);
-                                PropertyZpidAndPrice.Add("zpid", int.Parse(item.zpid));
-                            }
-                        }
-                        
-
-
-                        if (PropertyZpidAndPrice.Count > 0)
+                        // Populate List with  and price amount Dictionary
+                        if (result != null)
                         {
-                            // Populate List with  and price amount Dictionary
-
-                            zpidOfPropertiesList.Add(PropertyZpidAndPrice);
-
+                            propertyList.Add(propertyObj);
                         }
+
+                           
                     }
                     else
                     {
@@ -136,24 +122,26 @@ namespace RealEstatePropertyShared.Data
                 }
 
             }
-            Console.WriteLine(zpidOfPropertiesList);
-            return zpidOfPropertiesList;
+            return propertyList;
         }
 
         public static List<RealEstateProperty> GetPropertiesDetailsForSale()
         {
             List<RealEstateProperty> properties = new List<RealEstateProperty>();
             ApiHelper.InitializeClient("xml");
-            var listOfZpidAndPrices = ProcessData.getZpidOfProperties();
+            var propertyList = ProcessData.getZpidOfProperties();
 
 
             var builder = new UriBuilder("http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?");
             var query = HttpUtility.ParseQueryString(builder.Query);
 
-            foreach (var itemDictionary in listOfZpidAndPrices)
+            foreach (var property in propertyList)
             {
+                var firstResult = property.SearchResults.response.results.result.First();
+                var lastResult = property.SearchResults.response.results.result.Last();
+
                 query["zws-id"] = APIKeys.ZillowKey;
-                query["zpid"] = itemDictionary["zpid"].ToString();
+                query["zpid"] = firstResult != null ? firstResult.zpid : lastResult.zpid;
                 builder.Query = query.ToString();
 
                 string url = builder.ToString();
@@ -177,7 +165,13 @@ namespace RealEstatePropertyShared.Data
                             var jsonText = JsonConvert.SerializeXmlNode(xmlNode);
                             var reiProperty = JsonConvert.DeserializeObject<REIProperty>(jsonText);
 
-                            reiProperty.UpdatedPropertyDetails.response.editedFacts.price = itemDictionary["priceAmount"];
+                            var amount = 0.0;
+                            var price = 0.0;
+                            if (double.TryParse(firstResult.zestimate.amount.text, out amount))
+                            {
+                                 price = amount;
+                            }
+
 
                             var images = reiProperty.UpdatedPropertyDetails.response.images?.image.url;
                             List<string> defaultImage = new List<string>() { "/Content/Images/No_photos_available.png" };
@@ -187,7 +181,7 @@ namespace RealEstatePropertyShared.Data
                             
 
                             var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.zpid);
-                            var price = Convert.ToDouble(reiProperty.UpdatedPropertyDetails.response.editedFacts.price);
+                            
                             var street = reiProperty.UpdatedPropertyDetails.response.address.street;
                             var city = reiProperty.UpdatedPropertyDetails.response.address.city;
                             var state = reiProperty.UpdatedPropertyDetails.response.address.state;

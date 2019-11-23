@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RealEstatePropertyShared.Data
 {
-    internal class PropertiesInitializer : DropCreateDatabaseIfModelChanges<Context>
+    internal class PropertiesInitializer : DropCreateDatabaseAlways<Context>
     {
         protected override void Seed(Context context)
         {
