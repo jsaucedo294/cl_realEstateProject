@@ -48,7 +48,7 @@ public class Request
 
     public class Image
     {
-        [JsonConverter(typeof(SingleValueArrayConverter<Images>))]
+        [JsonConverter(typeof(SingleValueArrayConverter<string>))]
         public List<string> url { get; set; }
     }
 
