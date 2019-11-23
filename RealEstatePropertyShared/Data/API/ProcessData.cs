@@ -14,7 +14,7 @@ namespace RealEstatePropertyShared.Data
     public static class ProcessData
     {
 
-        public static List<Dictionary<string, string>> GetPropertiesForSale()
+        public static List<Dictionary<string, string>> GetPropertiesForSale(string zipcode)
         {
             /*
            *&city=louisville&childtype=neighborhood
@@ -24,7 +24,17 @@ namespace RealEstatePropertyShared.Data
             var builder = new UriBuilder("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
-            query["postalcode"] = "40206";
+            if (zipcode != "")
+            {
+                query["postalcode"] = zipcode;
+            }
+            else
+            {
+                query["address1"] = "320 IDLEWYLDE DR";
+                query["address2"] = "318 IDLEWYLDE DR";
+                query["radius"] = "20";
+            }
+            
             query["propertytype"] = "SFR";
             query["page"] = "1";
             query["pagesize"] = "10";
@@ -64,13 +74,13 @@ namespace RealEstatePropertyShared.Data
 
         }
 
-        public static List<GetSearchResults> getZpidOfProperties()
+        public static List<GetSearchResults> getZpidOfProperties(string zipcode)
         {
             List<GetSearchResults> propertyList = new List<GetSearchResults>();
             
 
             ApiHelper.InitializeClient("json");
-            var propertyInfo = ProcessData.GetPropertiesForSale();
+            var propertyInfo = ProcessData.GetPropertiesForSale(zipcode);
 
             ApiHelper.InitializeClient("xml");
 
@@ -102,7 +112,7 @@ namespace RealEstatePropertyShared.Data
                        
                         var propertyObj = JsonConvert.DeserializeObject<GetSearchResults>(jsonText);
 
-                        var result = propertyObj.SearchResults.response.results.result;
+                        var result = propertyObj.SearchResults.response?.results.result;
 
 
                         // Populate List with  and price amount Dictionary
@@ -123,11 +133,11 @@ namespace RealEstatePropertyShared.Data
             return propertyList;
         }
 
-        public static List<RealEstateProperty> GetPropertiesDetailsForSale()
+        public static List<RealEstateProperty> GetPropertiesDetailsForSale(string zipcode)
         {
             List<RealEstateProperty> properties = new List<RealEstateProperty>();
             ApiHelper.InitializeClient("xml");
-            var propertyList = ProcessData.getZpidOfProperties();
+            var propertyList = ProcessData.getZpidOfProperties(zipcode);
 
 
             var builder = new UriBuilder("http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?");
@@ -183,7 +193,7 @@ namespace RealEstatePropertyShared.Data
                             var street = reiProperty.UpdatedPropertyDetails.response.address.street;
                             var city = reiProperty.UpdatedPropertyDetails.response.address.city;
                             var state = reiProperty.UpdatedPropertyDetails.response.address.state;
-                            var zipcode = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.address.zipcode);
+                            var zipcodeAdded = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.address.zipcode);
                             var latitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.latitude);
                             var longitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.longitude);
                             var propertyType = reiProperty.UpdatedPropertyDetails.response.editedFacts.useCode;
@@ -209,7 +219,7 @@ namespace RealEstatePropertyShared.Data
                                 Street = street,
                                 City = city,
                                 State = state,
-                                Zipcode = zipcode,
+                                Zipcode = zipcodeAdded,
                                 Latitude = latitude,
                                 Longitude = longitude,
                                 Price = price,

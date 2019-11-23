@@ -13,7 +13,7 @@ namespace RealEstatePropertyShared
     {
         public Context()
         {
-            Database.SetInitializer(new PropertiesInitializer());
+            //Database.SetInitializer(new PropertiesInitializer());
             
         }
         public DbSet<RealEstateProperty> RealEstateProperties { get; set; }

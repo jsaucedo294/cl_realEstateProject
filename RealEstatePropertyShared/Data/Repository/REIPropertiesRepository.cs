@@ -25,9 +25,20 @@ namespace RealEstatePropertyShared.Data
                 .SingleOrDefault();
         }
 
+      
+        public override IList<RealEstateProperty> GetList(int zipcode)
+        {
+            return Context.RealEstateProperties.Where(p => p.Zipcode == zipcode).ToList();
+        }
         public override IList<RealEstateProperty> GetList()
         {
             return Context.RealEstateProperties.OrderBy(p => p.Zipcode).ToList();
         }
+
+        public bool doesExist(int zipcode)
+        {
+            return Context.RealEstateProperties.Any(p => p.Zipcode == zipcode);
+        }
+
     }
 }

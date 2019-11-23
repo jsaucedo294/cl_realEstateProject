@@ -193,6 +193,8 @@
     <Content Include="Views\RealEstateProperties\Index.cshtml" />
     <Content Include="Views\RealEstateProperties\Details.cshtml" />
     <Content Include="Scripts\swiper.min.js.map" />
+    <Content Include="Views\RealEstateProperties\PropertiesForSale.cshtml" />
+    <Content Include="Views\RealEstateProperties\ViewProperties.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

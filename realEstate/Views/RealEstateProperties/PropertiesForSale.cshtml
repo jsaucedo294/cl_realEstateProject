@@ -1,0 +1,51 @@
+﻿@model List<RealEstatePropertyShared.Models.RealEstateProperty>
+
+@{
+    ViewBag.Title = "PropertiesForSale";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Properties For Sale</h2>
+
+<section>
+    <div class="container">
+        <div class="row">
+
+            @{
+                var sortedProperties = Model.OrderByDescending(p => p.CapRate);
+
+            }
+            @foreach (var property in sortedProperties)
+            {
+                <div class="col-md-4">
+                    <div class="property-card">
+                        <div class="image-container">
+                            <img src="@property.Images[0]" />
+                        </div>
+                        <div class="property-card-info">
+                            <div class="property-card-info-top">
+                                <h3>$ @property.Price.ToString()</h3>
+                                <p>@property.Bedrooms bds | @property.Bathrooms ba | @property.FinishedSqFt sqft</p>
+                            </div>
+                            <div class="property-card-info-bottom">
+                                <h5>@property.Street, @property.City, @property.State @property.Zipcode</h5>
+                                <h5>Monthly Morgage: $ @property.MorgagePerYear</h5>
+                                <h5>Property Manager: $ @property.PropertyManagerPerYear</h5>
+                                <h5>Property Taxes: $ @property.PropertyTaxPerYear</h5>
+                                <h5>Vacancy Per Year: $ @property.VacancyPerYear</h5>
+                                <h5>Rent Per Year: $ @property.RentPerYear</h5>
+                                <h5>Loan Amount: $ @property.LoanAmount</h5>
+                                <h5>NOI: $ @property.NOI</h5>
+                                <h5>Cap Rate: @property.CapRate %</h5>
+                                <h5>Cashflow: $ @property.Cashflow</h5>
+                                @Html.ActionLink("Details", "Details", new { zpid = @property.Zpid })
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

@@ -12,11 +12,11 @@ namespace RealEstatePropertyShared.Data
     {
         protected override void Seed(Context context)
         {
-            var propertiesFromAPI = ProcessData.GetPropertiesDetailsForSale();
+            //var propertiesFromAPI = ProcessData.GetPropertiesDetailsForSale();
             
-            propertiesFromAPI.ForEach( p => context.RealEstateProperties.Add(p));
+            //propertiesFromAPI.ForEach( p => context.RealEstateProperties.Add(p));
 
-            context.SaveChanges();
+            //context.SaveChanges();
 
         }
 

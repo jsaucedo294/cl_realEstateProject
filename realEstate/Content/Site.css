@@ -28,17 +28,22 @@ body {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+/****** INDEX INPUT & BTN ******/
+input.zipcode-input {
+    height: 60px;
+    width: 80% !important;
+    padding-left: 20px;
+    font-size: 1.5em;
 }
-
+.zipcode-btn {
+    padding: 20px 40px;
+    background-color: #333;
+    color: #fff;
+}
 /****** CARD STYLES ******/
-
 .property-card {
-    background-color:#fff;
+    background-color: #fff;
     margin-bottom: 20px;
 }
 .property-card .image-container {

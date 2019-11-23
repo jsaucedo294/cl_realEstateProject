@@ -18,8 +18,11 @@ namespace RealEstatePropertyShared.Data
         }
 
         public abstract TEntity Get(int id);
-        public abstract IList<TEntity> GetList();
 
+        public abstract IList<TEntity> GetList();
+        public abstract IList<TEntity> GetList(int zipcode);
+
+        
         public void Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
