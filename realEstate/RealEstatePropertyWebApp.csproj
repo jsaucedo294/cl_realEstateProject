@@ -156,6 +156,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\No_photos_available.png" />
+    <Content Include="Content\swiper.css" />
+    <Content Include="Content\swiper.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -173,6 +175,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\swiper.esm.bundle.js" />
+    <Content Include="Scripts\swiper.esm.js" />
+    <Content Include="Scripts\swiper.js" />
+    <Content Include="Scripts\swiper.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -186,6 +192,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\RealEstateProperties\Index.cshtml" />
     <Content Include="Views\RealEstateProperties\Details.cshtml" />
+    <Content Include="Scripts\swiper.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
