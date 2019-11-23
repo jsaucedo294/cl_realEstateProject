@@ -27,7 +27,7 @@ namespace RealEstatePropertyShared.Data
 
         public override IList<RealEstateProperty> GetList()
         {
-            return Context.RealEstateProperties.OrderBy(p => p.Zpid).ToList();
+            return Context.RealEstateProperties.OrderBy(p => p.Zipcode).ToList();
         }
     }
 }

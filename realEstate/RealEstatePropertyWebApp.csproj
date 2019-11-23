@@ -185,6 +185,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\RealEstateProperties\Index.cshtml" />
+    <Content Include="Views\RealEstateProperties\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

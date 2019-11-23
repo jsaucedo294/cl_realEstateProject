@@ -22,7 +22,7 @@ namespace RealEstatePropertyShared.Models
         public double? Longitude { get; set; }
         
         [DataType(DataType.Currency)]
-        [DisplayFormat(NullDisplayText = "n/a", ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DisplayFormat(NullDisplayText = "n/a", ApplyFormatInEditMode = true, DataFormatString = "{0:C}")]
         public double? Price { get; set; }
         public string PropertyType { get; set; }
         public int? Bedrooms { get; set; }
@@ -89,6 +89,11 @@ namespace RealEstatePropertyShared.Models
         double _numOfPayments = 30 * 12;
 
         public double? NOI => RentPerYear - (VacancyPerYear + PropertyTaxPerYear + PropertyManagerPerYear + _insurance_per_year + _repairs_per_year + _capital_expenses_per_year);
+
+        public double? CapRate => (NOI / Price) * 100;
+
+
+        public double? Cashflow => NOI - MorgagePerYear;
         public double? LoanAmount => Price * 0.80;
 
 

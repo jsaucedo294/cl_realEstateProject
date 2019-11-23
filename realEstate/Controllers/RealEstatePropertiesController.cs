@@ -26,6 +26,11 @@ namespace realEstate.Controllers
 
             return View(reiProperties);
         }
+        public ActionResult Details(int zpid)
+        {
+            var property = _reiPropertiesRepository.Get(zpid);
+            return View(property);
+        }
 
     }
 }
