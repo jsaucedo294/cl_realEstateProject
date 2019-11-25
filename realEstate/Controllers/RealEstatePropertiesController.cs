@@ -1,9 +1,9 @@
-﻿using RealEstatePropertyShared;
-using RealEstatePropertyShared.Data;
+﻿using RealEstatePropertyShared.Data;
 using RealEstatePropertyShared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -26,20 +26,31 @@ namespace realEstate.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult PropertiesForSale(string zipcode)
+        public ActionResult PropertiesForSale(string input)
         {
-            if (zipcode == "" || zipcode == null)
+            var pattern = @"\d{5}";
+            var regEx = new Regex(pattern);
+
+            MatchCollection matchedZipcode = regEx.Matches(input);
+            var zipCodeValue = matchedZipcode[0].Value;
+
+
+            if (zipCodeValue == "" || zipCodeValue == null)
             {
                var propertiesList = _reiPropertiesRepository.GetList();
                 return View(propertiesList);
             }
 
-            var propertiesByZipcode = _reiPropertiesRepository.GetList(int.Parse(zipcode));
+
+            var propertiesByZipcode = _reiPropertiesRepository.GetList(int.Parse(zipCodeValue));
 
             if (propertiesByZipcode.Count <= 3)
             {
 
-                var propertiesList = ProcessData.GetPropertiesDetailsForSale(zipcode);
+                // GET DATA FROM API
+                var listOfAddresses = ProcessData.GetListOfAddresses(zipCodeValue);
+                var getZpidAndPrices = ProcessData.GetZpidAndPrices(listOfAddresses);
+                var propertiesList = ProcessData.GetPropertiesDetailsForSale(getZpidAndPrices);
 
                 foreach (var property in propertiesList)
                 {
@@ -49,7 +60,7 @@ namespace realEstate.Controllers
                     }
                 }
 
-                var propertiesByZipcode2 = _reiPropertiesRepository.GetList(int.Parse(zipcode));
+                var propertiesByZipcode2 = _reiPropertiesRepository.GetList(int.Parse(zipCodeValue));
                 return View(propertiesByZipcode2);
 
             }

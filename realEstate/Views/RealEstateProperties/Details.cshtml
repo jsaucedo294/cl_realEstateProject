@@ -37,54 +37,55 @@
                 }
             </div>
         </div>
-    </div>
 
-    <div class="property-details-container">
-        <h5>@Model.Street, @Model.City, @Model.State @Model.Zipcode</h5>
-        <h5>@Model.Bedrooms bds | @Model.Bathrooms ba | @Model.FinishedSqFt sqft</h5>
-        <p>@Model.HomeDescription</p>
-        <h5>Facts and Features</h5>
-        <div class="row">
-            <div class="col-md-4">
-                <p>Type</p>
-                <p>@Model.PropertyType</p>
+
+        <div class="property-details-container">
+            <h5>@Model.Street, @Model.City, @Model.State @Model.Zipcode</h5>
+            <h5>@Model.Bedrooms bds | @Model.Bathrooms ba | @Model.FinishedSqFt sqft</h5>
+            <p>@Model.HomeDescription</p>
+            <h5>Facts and Features</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Type</p>
+                    <p>@Model.PropertyType</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Heating</p>
+                    <p>@Model.HeatingSystem</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Cooling</p>
+                    <p>@Model.CoolingSystem</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Parking</p>
+                    <p>@Model.ParkingType</p>
+                </div>
+                <div class="col-md-4">
+                    <p>Lot</p>
+                    <p>@Model.LotSizeSqFt sqft</p>
+                </div>
             </div>
-            <div class="col-md-4">
-                <p>Heating</p>
-                <p>@Model.HeatingSystem</p>
-            </div>
-            <div class="col-md-4">
-                <p>Cooling</p>
-                <p>@Model.CoolingSystem</p>
-            </div>
-            <div class="col-md-4">
-                <p>Parking</p>
-                <p>@Model.ParkingType</p>
-            </div>
-            <div class="col-md-4">
-                <p>Lot</p>
-                <p>@Model.LotSizeSqFt sqft</p>
-            </div>
-        </div>
-        <h5>Interior Features</h5>
-        <div class="row">
-            <div class="col-md-6">
-                <p>Bedrooms</p>
-                <p>@Model.Bedrooms</p>
-            </div>
-            <div class="col-md-6">
-                <p>Flooring</p>
-                <p>@Model.FloorCovering</p>
-                <p>@Model.NumFloors</p>
-            </div>
-            <div class="col-md-6">
-                <p>Arquitecture</p>
-                <p>@Model.Architecture</p>
-            </div>
-            <div class="col-md-6">
-                <p>Other Interior Featuers</p>
-                <p>Room Number: @Model.NumRooms</p>
-                <p>Basement: @Model.Basement</p>
+            <h5>Interior Features</h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Bedrooms</p>
+                    <p>@Model.Bedrooms</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Flooring</p>
+                    <p>@Model.FloorCovering</p>
+                    <p>@Model.NumFloors</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Arquitecture</p>
+                    <p>@Model.Architecture</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Other Interior Featuers</p>
+                    <p>Room Number: @Model.NumRooms</p>
+                    <p>Basement: @Model.Basement</p>
+                </div>
             </div>
         </div>
     </div>
@@ -99,32 +100,31 @@
 
         document.addEventListener("DOMContentLoaded", function (e) {
             var swipers = document.querySelectorAll(".swiper-container");
-            if (swipers.length)
-            { 
+            if (swipers.length) {
                 var galleryThumbs = new Swiper('.gallery-thumbs', {
-                  spaceBetween: 10,
-                  slidesPerView: 4,
-                  loop: true,
-                  freeMode: true,
-                  loopedSlides: 5, //looped slides should be the same
-                  watchSlidesVisibility: true,
-                  watchSlidesProgress: true,
+                    spaceBetween: 10,
+                    slidesPerView: 4,
+                    loop: true,
+                    freeMode: true,
+                    loopedSlides: 5, //looped slides should be the same
+                    watchSlidesVisibility: true,
+                    watchSlidesProgress: true,
                 });
                 var galleryTop = new Swiper('.gallery-top', {
-                  spaceBetween: 10,
-                  loop:true,
-                  loopedSlides: 5, //looped slides should be the same
-                  navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                  },
-                  thumbs: {
-                    swiper: galleryThumbs,
-                  },
+                    spaceBetween: 10,
+                    loop: true,
+                    loopedSlides: 5, //looped slides should be the same
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    thumbs: {
+                        swiper: galleryThumbs,
+                    },
                 });
             }
             e.preventDefault();
-            });
-       
+        });
+
     </script>
 }

@@ -8,13 +8,14 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Xml;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace RealEstatePropertyShared.Data
 {
     public static class ProcessData
     {
 
-        public static List<Dictionary<string, string>> GetPropertiesForSale(string zipcode)
+        public static List<Dictionary<string, string>> GetListOfAddresses(string zipcode)
         {
             /*
            *&city=louisville&childtype=neighborhood
@@ -24,6 +25,9 @@ namespace RealEstatePropertyShared.Data
             var builder = new UriBuilder("https://api.gateway.attomdata.com/propertyapi/v1.0.0/property/address");
 
             var query = HttpUtility.ParseQueryString(builder.Query);
+                
+           
+
             if (zipcode != "")
             {
                 query["postalcode"] = zipcode;
@@ -74,20 +78,17 @@ namespace RealEstatePropertyShared.Data
 
         }
 
-        public static List<GetSearchResults> getZpidOfProperties(string zipcode)
+        public static List<GetSearchResults> GetZpidAndPrices(List<Dictionary<string, string>> listOfAddresses)
         {
             List<GetSearchResults> propertyList = new List<GetSearchResults>();
             
-
-            ApiHelper.InitializeClient("json");
-            var propertyInfo = ProcessData.GetPropertiesForSale(zipcode);
 
             ApiHelper.InitializeClient("xml");
 
             var builder = new UriBuilder("http://www.zillow.com/webservice/GetSearchResults.htm?");
             var query = HttpUtility.ParseQueryString(builder.Query);
 
-            foreach (var property in propertyInfo)
+            foreach (var property in listOfAddresses)
             {
                 query["zws-id"] = APIKeys.ZillowKey;
                 query["address"] = property["address"];
@@ -133,17 +134,14 @@ namespace RealEstatePropertyShared.Data
             return propertyList;
         }
 
-        public static List<RealEstateProperty> GetPropertiesDetailsForSale(string zipcode)
+        public static List<RealEstateProperty> GetPropertiesDetailsForSale(List<GetSearchResults> listOfProperties)
         {
             List<RealEstateProperty> properties = new List<RealEstateProperty>();
-            ApiHelper.InitializeClient("xml");
-            var propertyList = ProcessData.getZpidOfProperties(zipcode);
-
 
             var builder = new UriBuilder("http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?");
             var query = HttpUtility.ParseQueryString(builder.Query);
 
-            foreach (var property in propertyList)
+            foreach (var property in listOfProperties)
             {
                 var firstResult = property.SearchResults.response.results.result.First();
                 var lastResult = property.SearchResults.response.results.result.Last();
