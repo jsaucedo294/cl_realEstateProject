@@ -3,16 +3,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-    <section style="padding: 0;height: 100vh; display: flex; flex-direction:column; justify-content: center; align-items: center">
-        <div class="container">
-            <div class="col-md-8 col-md-offset-2">
-            @using (Html.BeginForm("PropertiesForSale", "RealEstateProperties", FormMethod.Post))
-            {
-
-                <input class="zipcode-input" name="zipcode" placeholder="Type Zipcode or leave empty" />
-                <button class="zipcode-btn" type="submit">Submit</button>
-            }
-            </div>
-        </div>
+    
+    <section class="homepage-section-container">
+   
+                @using (Html.BeginForm("PropertiesForSale", "RealEstateProperties", FormMethod.Post))
+                {
+                    <div class="homepage-input-cta">
+                        <input type="text" name="zipcode" class="zipcode-input" placeholder="Search">
+                        <div class="input-group-append">
+                            <button class="zipcode-btn" type="submit"><img class="search-icon" src="~/Content/Images/search_icon.svg" /></button>
+                        </div>
+                    </div>
+                }
     </section>

@@ -6,14 +6,15 @@
 }
 
 
-<h2>View Properties</h2>
+
 
 <section>
     <div class="container">
+        <h2>View Properties</h2>
         <div class="row">
 
             @{
-                var sortedProperties = Model.OrderByDescending(p => p.CapRate);
+               var sortedProperties = Model.Where(p => p.Price != 0).OrderByDescending(p => p.CapRate);
 
             }
             @foreach (var property in sortedProperties)

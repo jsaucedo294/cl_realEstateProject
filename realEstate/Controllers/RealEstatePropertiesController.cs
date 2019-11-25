@@ -28,7 +28,7 @@ namespace realEstate.Controllers
         [HttpPost]
         public ActionResult PropertiesForSale(string zipcode)
         {
-            if (zipcode == "")
+            if (zipcode == "" || zipcode == null)
             {
                var propertiesList = _reiPropertiesRepository.GetList();
                 return View(propertiesList);

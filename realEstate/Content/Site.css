@@ -15,11 +15,6 @@ body {
         padding: 50px 0;
     }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -28,18 +23,44 @@ body {
     white-space: normal;
 }
 
+/****** HOMEPAGE STYLES ******/
+.homepage-section-container {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-image: url("/Content/Images/house-homepage-img.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
 
+.homepage-input-cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 600px;
+    display: flex;
+}
 /****** INDEX INPUT & BTN ******/
 input.zipcode-input {
-    height: 60px;
+    height: 65px;
     width: 80% !important;
     padding-left: 20px;
     font-size: 1.5em;
 }
 .zipcode-btn {
-    padding: 20px 40px;
+    padding: 15px 30px;
     background-color: #333;
     color: #fff;
+}
+.search-icon {
+    width: 30px;
+    height: 30px;
 }
 /****** CARD STYLES ******/
 .property-card {
@@ -80,9 +101,14 @@ input.zipcode-input {
     padding: 0;
     align-self: flex-end;
 }
-
+.details-btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 30px;
+    margin: 10px 0;
+    font-size: 1.5em;
+}
 /*SWIPER GALLERY*/
-
 html, body {
     position: relative;
     height: 100%;
