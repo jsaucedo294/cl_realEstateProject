@@ -1,4 +1,5 @@
 ﻿@model List<RealEstatePropertyShared.Models.RealEstateProperty>
+@using  System.Globalization;
 
 @{
     ViewBag.Title = "PropertiesForSale";
@@ -22,18 +23,20 @@
                     <div class="property-card">
                         <div class="image-container">
                             <img src="@property.Images[0]" />
+                            <a onclick=""></a>
                         </div>
                         <div class="property-card-info">
                             <div class="property-card-info-top">
-                                <h3>$ @property.Price.ToString()</h3>
+                                <h3>@property.PriceAsString</h3>
                                 <p>@property.Bedrooms bds | @property.Bathrooms ba | @property.FinishedSqFt sqft</p>
                             </div>
                             <div class="property-card-info-bottom">
                                 <h5>@property.Street, @property.City, @property.State @property.Zipcode</h5>
                                 <h5>Rent Per Year: $ @property.RentPerYear</h5>
                                 <h5>NOI: $ @property.NOI</h5>
-                                <h5>Cap Rate: @property.CapRate %</h5>
-                                <h5>Cashflow: $ @property.Cashflow</h5>
+                                <h5>Cap Rate: @property.CapRateAsString</h5>
+                                <h5>Cashflow: @property.CashflowAsString</h5>
+                                <br />
                                 @Html.ActionLink("Details", "Details", new { zpid = @property.Zpid }, new { @class = "details-btn" })
                             </div>
 

@@ -37,7 +37,7 @@ namespace realEstate.Controllers
 
             if (zipCodeValue == "" || zipCodeValue == null)
             {
-               var propertiesList = _reiPropertiesRepository.GetList();
+                var propertiesList = _reiPropertiesRepository.GetList();
                 return View(propertiesList);
             }
 
@@ -76,12 +76,24 @@ namespace realEstate.Controllers
             return View(property);
         }
 
-        public ActionResult ViewProperties()
+        [HttpPost]
+        public ActionResult SaveProperty(string zpid)
+        {
+
+            var property = _reiPropertiesRepository.Get(int.Parse(zpid));
+
+            property.IsSaved = true;
+
+            _reiPropertiesRepository.Update(property);
+            return View("Details", property);
+        }
+        public ActionResult ViewSavedProperties()
         {
 
             var propertiesList = _reiPropertiesRepository.GetList();
+            var savedProperties = propertiesList.Where(p => p.IsSaved == true).ToList();
 
-            return View(propertiesList);
+            return View(savedProperties);
         }
     }
 }

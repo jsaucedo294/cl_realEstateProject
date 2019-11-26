@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace RealEstatePropertyShared.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int Zpid { get; set; }
+        public bool IsSaved { get; set; } = false;
         public string Street { get; set; }
         public string City { get; set; }
         public string State { get; set; }
@@ -21,9 +23,20 @@ namespace RealEstatePropertyShared.Models
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         
-        [DataType(DataType.Currency)]
-        [DisplayFormat(NullDisplayText = "n/a", ApplyFormatInEditMode = true, DataFormatString = "{0:C}")]
         public double? Price { get; set; }
+
+        public string PriceAsString
+        {
+            get
+            {
+                if (Price.HasValue == false)
+                {
+                    return "0";
+                }
+                return Price.Value.ToString("C", CultureInfo.CurrentCulture);
+            }
+        }
+
         public string PropertyType { get; set; }
         public int? Bedrooms { get; set; }
         public double? Bathrooms { get; set; }
@@ -59,11 +72,14 @@ namespace RealEstatePropertyShared.Models
         public string HomeDescription { get; set; }
 
         public double? MorgagePerYear => (_rateOfInterest * LoanAmount) / (1 - Math.Pow(1 + _rateOfInterest, _numOfPayments * -1));
+
         public double? PropertyTaxPerYear => Price * 0.930 / 100;
+
 
         public double? RentPerYear {
             get 
             {
+                
                 if (NumRooms > 4)
                 {
                     return 2000.0 * 12;
@@ -90,10 +106,34 @@ namespace RealEstatePropertyShared.Models
 
         public double? NOI => RentPerYear - (VacancyPerYear + PropertyTaxPerYear + PropertyManagerPerYear + _insurance_per_year + _repairs_per_year + _capital_expenses_per_year);
 
-        public double? CapRate => (NOI / Price) * 100;
+        [DisplayFormat(DataFormatString = "{0:P2}")]
+        public double? CapRate => (NOI / Price);
+        public string CapRateAsString
+        {
+            get
+            {
+                if (CapRate.HasValue == false)
+                {
+                    return "0";
+                }
+                return CapRate.Value.ToString("P2", CultureInfo.CurrentCulture);
+            }
 
-
+        }
         public double? Cashflow => NOI - MorgagePerYear;
+
+        public string CashflowAsString
+        {
+            get
+            {
+                if (Cashflow.HasValue == false)
+                {
+                    return "0";
+                }
+                return Cashflow.Value.ToString("C", CultureInfo.CurrentCulture);
+            }
+        }
+
         public double? LoanAmount => Price * 0.80;
 
 

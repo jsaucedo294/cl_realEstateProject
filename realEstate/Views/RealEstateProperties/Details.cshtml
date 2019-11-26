@@ -88,6 +88,13 @@
                 </div>
             </div>
         </div>
+
+        @using (Html.BeginForm("SaveProperty", "RealEstateProperties", FormMethod.Post))
+        {
+            <input type="hidden" name="zpid" value="@Model.Zpid">
+
+            <button type="submit">Like</button>
+        }
     </div>
 </section>
 
