@@ -19,11 +19,17 @@
             }
             @foreach (var property in sortedProperties)
             {
-                <div class="col-md-4">
+                <div class="col-sm-6 col-md-4">
                     <div class="property-card">
                         <div class="image-container">
                             <img src="@property.Images[0]" />
-                            <a onclick=""></a>
+                            @using (Html.BeginForm("SaveProperty", "RealEstateProperties", FormMethod.Post))
+                            {
+                                <input type="hidden" name="zpid" value="@property.Zpid">
+
+                                <button class="like-btn @Html.Raw(@property.IsSaved == true ? "saved-btn" : "nosaved-btn" )" type="submit"><i class="fa fa-heart" aria-hidden="true"></i>
+                                </button>
+                            }
                         </div>
                         <div class="property-card-info">
                             <div class="property-card-info-top">
@@ -32,10 +38,10 @@
                             </div>
                             <div class="property-card-info-bottom">
                                 <h5>@property.Street, @property.City, @property.State @property.Zipcode</h5>
-                                <h5>Rent Per Year: $ @property.RentPerYear</h5>
-                                <h5>NOI: $ @property.NOI</h5>
+                                <h5>NOI: @property.NOIAsString</h5>
                                 <h5>Cap Rate: @property.CapRateAsString</h5>
                                 <h5>Cashflow: @property.CashflowAsString</h5>
+                                <h5>COC: @property.COCAsString</h5>
                                 <br />
                                 @Html.ActionLink("Details", "Details", new { zpid = @property.Zpid }, new { @class = "details-btn" })
                             </div>

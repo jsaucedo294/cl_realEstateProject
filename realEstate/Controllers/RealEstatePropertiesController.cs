@@ -82,10 +82,18 @@ namespace realEstate.Controllers
 
             var property = _reiPropertiesRepository.Get(int.Parse(zpid));
 
-            property.IsSaved = true;
+            if (property.IsSaved == true)
+            {
+                property.IsSaved = false;
+            }
+            else
+            {
+                property.IsSaved = true;
+            }
+           
 
             _reiPropertiesRepository.Update(property);
-            return View("Details", property);
+            return RedirectToAction("ViewSavedProperties");
         }
         public ActionResult ViewSavedProperties()
         {

@@ -49,14 +49,22 @@ body {
 /****** INDEX INPUT & BTN ******/
 input.zipcode-input {
     height: 65px;
-    width: 80% !important;
+    width: 100% !important;
     padding-left: 20px;
     font-size: 1.5em;
 }
 .zipcode-btn {
-    padding: 15px 30px;
-    background-color: #333;
-    color: #fff;
+    padding: 10px 10px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+}
+.zipcode-btn i {
+    font-size: 1.5em;
+    color: #333;
 }
 .search-icon {
     width: 30px;
@@ -108,6 +116,23 @@ input.zipcode-input {
     margin: 10px 0;
     font-size: 1.5em;
 }
+.like-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    border: none;
+    background-color: transparent;
+}
+.saved-btn i {
+    font-size: 1.5em;
+    color: #ff0000;
+}
+
+.nosaved-btn i {
+    font-size: 1.5em;
+    color: #808080;
+}
 /*SWIPER GALLERY*/
 html, body {
     position: relative;
@@ -144,4 +169,22 @@ html, body {
 
     .gallery-thumbs .swiper-slide-thumb-active {
         opacity: 1;
+    }
+
+
+/***** Saved Properties Page*****/
+.no-properties-message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+    .no-properties-message i {
+        font-size: 15em; 
     }

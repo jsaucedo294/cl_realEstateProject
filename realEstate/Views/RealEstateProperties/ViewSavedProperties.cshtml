@@ -1,7 +1,7 @@
 ﻿@model List<RealEstatePropertyShared.Models.RealEstateProperty>
 
 @{
-    ViewBag.Title = "View Saved Properties";
+    ViewBag.Title = "Saved Properties";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,41 +10,59 @@
 
 <section>
     <div class="container">
-        <h2>@ViewBag.Title</h2>
         <div class="row">
 
             @{
-               var sortedProperties = Model.Where(p => p.Price != 0).OrderByDescending(p => p.CapRate);
-
+                var sortedProperties = Model.Where(p => p.Price != 0).OrderByDescending(p => p.CapRate).ToList();
             }
-            @foreach (var property in sortedProperties)
-            {
-                <div class="col-md-4">
-                    <div class="property-card">
-                        <div class="image-container">
-                            <img src="@property.Images[0]" />
-                        </div>
-                        <div class="property-card-info">
-                            <div class="property-card-info-top">
-                                <h3>$ @property.Price.ToString()</h3>
-                                <p>@property.Bedrooms bds | @property.Bathrooms ba | @property.FinishedSqFt sqft</p>
-                            </div>
-                            <div class="property-card-info-bottom">
-                                <h5>@property.Street, @property.City, @property.State @property.Zipcode</h5>
-                                <h5>Monthly Morgage: $ @property.MorgagePerYear</h5>
-                                <h5>Property Manager: $ @property.PropertyManagerPerYear</h5>
-                                <h5>Property Taxes: $ @property.PropertyTaxPerYear</h5>
-                                <h5>Vacancy Per Year: $ @property.VacancyPerYear</h5>
-                                <h5>Rent Per Year: $ @property.RentPerYear</h5>
-                                <h5>Loan Amount: $ @property.LoanAmount</h5>
-                                <h5>NOI: $ @property.NOI</h5>
-                                <h5>Cap Rate: @property.CapRate %</h5>
-                                <h5>Cashflow: $ @property.Cashflow</h5>
-                                @Html.ActionLink("Details", "Details", new { zpid = @property.Zpid })
-                            </div>
 
+            @if (sortedProperties.Count > 0)
+            {
+                foreach (var property in sortedProperties)
+                {
+                    <h2>@ViewBag.Title</h2>
+                    <div class="col-md-6 col-md-4">
+                        <div class="property-card">
+                            <div class="image-container">
+                                <img src="@property.Images[0]" />
+                                @using (Html.BeginForm("SaveProperty", "RealEstateProperties", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="zpid" value="@property.Zpid">
+
+                                    <button class="like-btn @Html.Raw(@property.IsSaved == true ? "saved-btn" : "nosaved-btn")" type="submit">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </button>
+                                }
+                            </div>
+                            <div class="property-card-info">
+                                <div class="property-card-info-top">
+                                    <h3>$ @property.Price.ToString()</h3>
+                                    <p>@property.Bedrooms bds | @property.Bathrooms ba | @property.FinishedSqFt sqft</p>
+                                </div>
+                                <div class="property-card-info-bottom">
+                                    <h5>@property.Street, @property.City, @property.State @property.Zipcode</h5>
+                                    <h5>Monthly Morgage: $ @property.MorgagePerYear</h5>
+                                    <h5>Property Manager: $ @property.PropertyManagerPerYear</h5>
+                                    <h5>Property Taxes: $ @property.PropertyTaxPerYear</h5>
+                                    <h5>Vacancy Per Year: $ @property.VacancyPerYear</h5>
+                                    <h5>Rent Per Year: $ @property.RentPerYear</h5>
+                                    <h5>Loan Amount: $ @property.LoanAmount</h5>
+                                    <h5>NOI: $ @property.NOI</h5>
+                                    <h5>Cap Rate: @property.CapRate %</h5>
+                                    <h5>Cashflow: $ @property.Cashflow</h5>
+                                    @Html.ActionLink("Details", "Details", new { zpid = @property.Zpid })
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+                }
+            }
+            else
+            {
+                <div class="no-properties-message">
+                    <i class="fa fa-frown-o" aria-hidden="true"></i>
+                    <h1>No Properties have been liked</h1>
                 </div>
             }
 
