@@ -1,0 +1,32 @@
+﻿@model RealEstatePropertyShared.Models.RealEstateProperty
+    <div class="col-sm-6 col-md-4">
+        <div class="property-card">
+            <div class="image-container">
+                <img src="@Model.Images[0]" />
+                @using (Html.BeginForm("SaveProperty", "RealEstateProperties", FormMethod.Post))
+                {
+                    <input type="hidden" name="zpid" value="@Model.Zpid">
+
+                    <button class="like-btn @Html.Raw(Model.IsSaved == true ? "saved-btn" : "nosaved-btn" )" type="submit">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                    </button>
+                }
+            </div>
+            <div class="property-card-info">
+                <div class="property-card-info-top">
+                    <h3>@Model.PriceAsString</h3>
+                    <p>@Model.Bedrooms bds | @Model.Bathrooms ba | @Model.FinishedSqFt sqft</p>
+                </div>
+                <div class="property-card-info-bottom">
+                    <h5>@Model.Street, @Model.City, @Model.State @Model.Zipcode</h5>
+                    <h5>NOI: @Model.NOIAsString</h5>
+                    <h5>Cap Rate: @Model.CapRateAsString</h5>
+                    <h5>Cashflow: @Model.CashflowAsString</h5>
+                    <h5>COC: @Model.COCAsString</h5>
+                    <br />
+                    @Html.ActionLink("Details", "Details", new { zpid = Model.Zpid }, new { @class = "details-btn" })
+                </div>
+
+            </div>
+        </div>
+    </div>

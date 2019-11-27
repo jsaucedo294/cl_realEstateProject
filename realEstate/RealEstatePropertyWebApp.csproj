@@ -197,6 +197,7 @@
     <Content Include="Scripts\swiper.min.js.map" />
     <Content Include="Views\RealEstateProperties\PropertiesForSale.cshtml" />
     <Content Include="Views\RealEstateProperties\ViewSavedProperties.cshtml" />
+    <Content Include="Views\Shared\_RealEstateProperty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
