@@ -140,6 +140,16 @@
                     }
                 </div>
             </div>
+
+
+            @using (Html.BeginForm("DeleteProperty", "RealEstateProperties", FormMethod.Post))
+            {
+                <input type="hidden" name="id" value="@Model.Id">
+
+                <button class="delete-btn" type="submit">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+                </button>
+            }
         </div>
     </div>
 </section>

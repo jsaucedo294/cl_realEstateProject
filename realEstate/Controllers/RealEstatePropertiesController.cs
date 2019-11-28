@@ -103,5 +103,15 @@ namespace realEstate.Controllers
 
             return View(savedProperties);
         }
+
+        [HttpPost]
+        public ActionResult DeleteProperty(string id)
+        {
+            _reiPropertiesRepository.Delete(int.Parse(id));
+
+            return RedirectToAction("Index");
+        }
+
+        
     }
 }

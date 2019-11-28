@@ -36,9 +36,9 @@ namespace RealEstatePropertyShared.Data
             return Context.RealEstateProperties.OrderBy(p => p.Zipcode).ToList();
         }
 
-        public bool doesExist(int zipcode)
+        public bool doesExist(int zpid)
         {
-            return Context.RealEstateProperties.Any(p => p.Zipcode == zipcode);
+            return Context.RealEstateProperties.Any(p => p.Zpid == zpid);
         }
 
     }
