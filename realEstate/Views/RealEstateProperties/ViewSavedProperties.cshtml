@@ -10,7 +10,7 @@
 
 <section>
     <div class="container">
-        <h2>@ViewBag.Title</h2>
+        
         <div class="row">
 
             @{
@@ -19,6 +19,7 @@
 
             @if (sortedProperties.Count > 0)
             {
+                <h2>@ViewBag.Title</h2>
                 foreach (var property in sortedProperties)
                 {
 

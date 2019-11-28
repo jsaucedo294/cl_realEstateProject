@@ -40,55 +40,107 @@
 
 
         <div class="property-details-container">
-            <h5>@Model.Street, @Model.City, @Model.State @Model.Zipcode</h5>
-            <h5>@Model.Bedrooms bds | @Model.Bathrooms ba | @Model.FinishedSqFt sqft</h5>
-            <p>@Model.HomeDescription</p>
-            <h5>Facts and Features</h5>
             <div class="row">
-                <div class="col-md-4">
-                    <p>Type</p>
-                    <p>@Model.PropertyType</p>
-                </div>
-                <div class="col-md-4">
-                    <p>Heating</p>
-                    <p>@Model.HeatingSystem</p>
-                </div>
-                <div class="col-md-4">
-                    <p>Cooling</p>
-                    <p>@Model.CoolingSystem</p>
-                </div>
-                <div class="col-md-4">
-                    <p>Parking</p>
-                    <p>@Model.ParkingType</p>
-                </div>
-                <div class="col-md-4">
-                    <p>Lot</p>
-                    <p>@Model.LotSizeSqFt sqft</p>
+                <div class="col-sm-6"><h2>@Model.PriceAsString</h2></div>
+                <div class="col-sm-6"><h2 style="text-align: right">@Model.Bedrooms bds | @Model.Bathrooms ba | @Model.FinishedSqFt sqft</h2></div>
+            </div>
+            <h2>@Model.Street, @Model.City, @Model.State @Model.Zipcode</h2>
+
+            <p>@Model.HomeDescription</p>
+            <h3 class="section-label">Facts and Features</h3>
+
+            <div class="facts-and-features-container">
+
+                <div class="row">
+                    @if (Model.PropertyType != null)
+                    {
+                        <div class="col-sm-3">
+                            <div class="property-fact-feature">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                                <p class="feature-label">Type</p>
+                                <p>@Model.PropertyType</p>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.HeatingSystem != null)
+                    {
+                        <div class="col-sm-3">
+                            <div class="property-fact-feature">
+                                <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
+                                <p class="feature-label">Heating</p>
+                                <p>@Model.HeatingSystem</p>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.CoolingSystem != null)
+                    {
+                        <div class="col-sm-3">
+                            <div class="property-fact-feature">
+                                <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                                <p class="feature-label">Cooling</p>
+                                <p>@Model.CoolingSystem</p>
+                            </div>
+                        </div>
+                    }
+                    @if (Model.ParkingType != null)
+                    {
+                        <div class="col-sm-3">
+                            <div class="property-fact-feature">
+                                <i class="fa fa-car" aria-hidden="true"></i>
+                                <p class="feature-label">Parking</p>
+                                <p>@Model.ParkingType</p>
+                            </div>
+                        </div>
+
+                    }
+                    @if (Model.LotSizeSqFt != null)
+                    {
+                        <div class="col-sm-3">
+                            <div class="property-fact-feature">
+                                <i class="fa fa-th-large" aria-hidden="true"></i>
+                                <p class="feature-label">Lot</p>
+                                <p>@Model.LotSizeSqFt sqft</p>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-            <h5>Interior Features</h5>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>Bedrooms</p>
-                    <p>@Model.Bedrooms</p>
-                </div>
-                <div class="col-md-6">
-                    <p>Flooring</p>
-                    <p>@Model.FloorCovering</p>
-                    <p>@Model.NumFloors</p>
-                </div>
-                <div class="col-md-6">
-                    <p>Arquitecture</p>
-                    <p>@Model.Architecture</p>
-                </div>
-                <div class="col-md-6">
-                    <p>Other Interior Featuers</p>
-                    <p>Room Number: @Model.NumRooms</p>
-                    <p>Basement: @Model.Basement</p>
+            <h3 class="section-label">Interior Features</h3>
+            <div class="interior-features-container">
+                <div class="row">
+                    @if (Model.Bedrooms != null)
+                    {
+                        <div class="col-sm-4">
+                            <p class="feature-label">Bedrooms</p>
+                            <p>@Model.Bedrooms</p>
+                        </div>
+                    }
+                    @if (Model.FloorCovering != null || Model.NumFloors != null)
+                    {
+                        <div class="col-sm-4">
+                            <p class="feature-label">Flooring</p>
+                            <p>@Model.FloorCovering</p>
+                            <p>@Model.NumFloors</p>
+                        </div>
+                    }
+                    @if (Model.Architecture != null)
+                    {
+                        <div class="col-sm-4">
+                            <p class="feature-label">Arquitecture</p>
+                            <p>@Model.Architecture</p>
+                        </div>
+                    }
+                    @if (Model.NumRooms != null || Model.Basement != null)
+                    {
+                        <div class="col-sm-4">
+                            <p class="feature-label">Other Interior Featuers</p>
+                            <p>Room Number: @Model.NumRooms</p>
+                            <p>Basement: @Model.Basement</p>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 

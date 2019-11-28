@@ -20,6 +20,7 @@ namespace RealEstatePropertyShared.Data
             var reiProperty = Context.RealEstateProperties.AsQueryable();
             
 
+
             return reiProperty
                 .Where(p => p.Zpid == zpid)
                 .SingleOrDefault();

@@ -11,9 +11,9 @@ body {
 
 
 
-    body section {
-        padding: 50px 0;
-    }
+body section {
+    padding: 50px 0;
+}
 
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -109,12 +109,23 @@ input.zipcode-input {
     padding: 0;
     align-self: flex-end;
 }
-.details-btn {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 30px;
-    margin: 10px 0;
-    font-size: 1.5em;
+.property-card-info-bottom {
+    padding: 10px 0;
+}
+    .details-btn {
+        background-color: #333;
+        border: solid 3px #333;
+        color: #fff;
+        padding: 10px 30px;
+        margin: 10px 0;
+        font-size: 1.5em;
+        transition: all .5s ease-in-out;
+    }
+.details-btn:hover {
+    text-decoration: none;
+    color: #333;
+    background-color: transparent;
+    border: solid 3px #333;
 }
 .like-btn {
     position: absolute;
@@ -171,6 +182,41 @@ html, body {
         opacity: 1;
     }
 
+/***** Details Page*****/
+
+.facts-and-features-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 40px;
+    margin: 20px 0;
+
+}
+.section-label {
+    font-weight: bold;
+    margin: 0 0 18px;
+    padding: 0;
+}
+.property-fact-feature {
+    padding: 0;
+    margin: 20px 0;
+}
+.property-fact-feature i {
+    font-size: 3em;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+}
+ .feature-label {
+        font-weight: bold;
+        font-size: 1.2em;
+    
+    }
+    .property-fact-feature p {
+        padding: 0 0 0 50px;
+        margin: 0;
+    }
 
 /***** Saved Properties Page*****/
 .no-properties-message {
@@ -182,7 +228,6 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
 }
 
     .no-properties-message i {
