@@ -71,7 +71,8 @@ namespace RealEstatePropertyShared.Models
 
         public string HomeDescription { get; set; }
 
-        public double DownPaymentPercentage { get; set; } = 0.20;
+        public double DownPaymentPercent { get; set; } = 20;
+        public double DownPaymentPercentage => DownPaymentPercent / 100;
         public double? MorgagePerYear => (RateOfInterest * LoanAmount.Value) / (1 - Math.Pow(1 + RateOfInterest, NumOfPayments * -1));
 
         public double? PropertyTaxPerYear => Price.Value * 0.930 / 100;
@@ -105,9 +106,11 @@ namespace RealEstatePropertyShared.Models
 
         public double CapitalExpensesPerYear { get; set; } = 1200;
 
-        public double RateOfInterest { get; set; } = 5.0 / 1200;
+        public double RateOfInterestPercentage { get; set; } = 5.0;
+        public double RateOfInterest => RateOfInterestPercentage / 1200;
 
-        public double NumOfPayments { get; set; } = 30 * 12;
+        public int NumOfYearsToPayLoan { get; set; } = 30;
+        public double NumOfPayments => NumOfYearsToPayLoan * 12;
 
         public double? NOI => RentPerYear.Value - (VacancyPerYear.Value + PropertyTaxPerYear.Value + PropertyManagerPerYear.Value + InsurancePerYear + RepairsPerYear + CapitalExpensesPerYear);
 

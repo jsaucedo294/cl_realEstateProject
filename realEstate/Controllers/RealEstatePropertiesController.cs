@@ -112,12 +112,12 @@ namespace realEstate.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public ActionResult EditProperty(int zpid, double downPaymentPercentage, double rateOfInterest, double numOfPayments, double InitialRepair)
+        public ActionResult EditProperty(int zpid, double downPaymentPercentage, double rateOfInterest, int numOfYearsToPay, double InitialRepair)
         {
             var property = _reiPropertiesRepository.Get(zpid);
-            property.DownPaymentPercentage = downPaymentPercentage;
-            property.RateOfInterest = rateOfInterest;
-            property.NumOfPayments = numOfPayments;
+            property.DownPaymentPercent = downPaymentPercentage;
+            property.RateOfInterestPercentage = rateOfInterest;
+            property.NumOfYearsToPayLoan = numOfYearsToPay;
             property.InitialRepair = InitialRepair;
 
             _reiPropertiesRepository.Update(property);
