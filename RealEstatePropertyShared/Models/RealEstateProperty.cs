@@ -72,7 +72,7 @@ namespace RealEstatePropertyShared.Models
         public string HomeDescription { get; set; }
 
         public double DownPaymentPercentage { get; set; } = 0.20;
-        public double? MorgagePerYear => (_rateOfInterest * LoanAmount.Value) / (1 - Math.Pow(1 + _rateOfInterest, _numOfPayments * -1));
+        public double? MorgagePerYear => (RateOfInterest * LoanAmount.Value) / (1 - Math.Pow(1 + RateOfInterest, NumOfPayments * -1));
 
         public double? PropertyTaxPerYear => Price.Value * 0.930 / 100;
 
@@ -99,13 +99,17 @@ namespace RealEstatePropertyShared.Models
         public double? VacancyPerYear => RentPerYear.Value * 0.05;
 
 
-        int _insurance_per_year = 110 * 12;
-        int _repairs_per_year = 100 * 12;
-        double _capital_expenses_per_year = 100 * 12;
-        double _rateOfInterest = 5.0 / 1200;
-        double _numOfPayments = 30 * 12;
+        public int InsurancePerYear { get; set; } = 1320;
 
-        public double? NOI => RentPerYear.Value - (VacancyPerYear.Value + PropertyTaxPerYear.Value + PropertyManagerPerYear.Value + _insurance_per_year + _repairs_per_year + _capital_expenses_per_year);
+        public int RepairsPerYear { get; set; } = 1200;
+
+        public double CapitalExpensesPerYear { get; set; } = 1200;
+
+        public double RateOfInterest { get; set; } = 5.0 / 1200;
+
+        public double NumOfPayments { get; set; } = 30 * 12;
+
+        public double? NOI => RentPerYear.Value - (VacancyPerYear.Value + PropertyTaxPerYear.Value + PropertyManagerPerYear.Value + InsurancePerYear + RepairsPerYear + CapitalExpensesPerYear);
 
         public string NOIAsString
         {
@@ -146,8 +150,9 @@ namespace RealEstatePropertyShared.Models
             }
         }
 
-        public double? LoanAmount => Price.Value * 0.80;
+        public double? LoanAmount => Price.Value * (1.00 - DownPaymentPercentage);
 
+        public double InitialRepair { get; set; } = 6000;
 
         public double? COC => (Cashflow.Value / (Price.Value * DownPaymentPercentage + 6000));
         public string COCAsString

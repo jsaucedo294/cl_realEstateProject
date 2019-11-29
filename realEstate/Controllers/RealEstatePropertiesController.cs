@@ -111,7 +111,18 @@ namespace realEstate.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult EditProperty(int zpid, double downPaymentPercentage, double rateOfInterest, double numOfPayments, double InitialRepair)
+        {
+            var property = _reiPropertiesRepository.Get(zpid);
+            property.DownPaymentPercentage = downPaymentPercentage;
+            property.RateOfInterest = rateOfInterest;
+            property.NumOfPayments = numOfPayments;
+            property.InitialRepair = InitialRepair;
 
+            _reiPropertiesRepository.Update(property);
+            return View("Details", property);
+        }
         
     }
 }
