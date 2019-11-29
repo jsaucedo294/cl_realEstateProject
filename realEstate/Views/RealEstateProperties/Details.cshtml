@@ -45,11 +45,43 @@
                 <div class="col-sm-6"><h2 style="text-align: right">@Model.Bedrooms bds | @Model.Bathrooms ba | @Model.FinishedSqFt sqft</h2></div>
             </div>
             <h2>@Model.Street, @Model.City, @Model.State @Model.Zipcode</h2>
+            <div class="facts-and-features-container">
 
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="property-fact-feature">
+                            <i class="fa fa-university" aria-hidden="true"></i>
+                            <p class="feature-label">NOI</p>
+                            <p>@Model.NOIAsString</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="property-fact-feature">
+                            <i class="fa fa-balance-scale" aria-hidden="true"></i>
+                            <p class="feature-label">Cap Rate</p>
+                            <p>@Model.CapRateAsString</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="property-fact-feature">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                            <p class="feature-label">Cashflow</p>
+                            <p>@Model.CashflowAsString</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="property-fact-feature">
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                            <p class="feature-label">Cash On Cash Return</p>
+                            <p>@Model.COCAsString</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <p>@Model.HomeDescription</p>
             <h3 class="section-label">Facts and Features</h3>
 
-            <div class="facts-and-features-container">
+            <div class="facts-and-features-container" style="background-color:#f8f8f8">
 
                 <div class="row">
                     @if (Model.PropertyType != null)
@@ -140,47 +172,47 @@
                     }
                 </div>
             </div>
-            @using (Html.BeginForm("EditProperty", "RealEstateProperties", FormMethod.Post))
-            {
-                @Html.Partial("_EditForm", Model);
-                <button class="delete-btn" type="submit">
-                    <i class="fa fa-pencil" aria-hidden="true"></i>Edit
-                </button>
-            }
+            <div class="edit-and-delete-container">
 
-
-            @using (Html.BeginForm("DeleteProperty", "RealEstateProperties", FormMethod.Post))
-            {
-                <input type="hidden" name="id" value="@Model.Id">
-
-
-                <div class="text-center">
+                @using (Html.BeginForm("EditProperty", "RealEstateProperties", FormMethod.Post))
+                {
                     <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#myModal" class="trigger-btn" data-toggle="modal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
-                </div>
+                    <a href="#editModal" class="trigger-btn btn btn-info" data-toggle="modal"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    @Html.Partial("_EditForm", Model);
+                }
 
-                <!-- Modal HTML -->
-                <div id="myModal" class="modal fade">
-                    <div class="modal-dialog modal-confirm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="icon-box">
-                                    <i class="fa fa-times material-icons" aria-hidden="true"></i>
+
+                @using (Html.BeginForm("DeleteProperty", "RealEstateProperties", FormMethod.Post))
+                {
+                    <input type="hidden" name="id" value="@Model.Id">
+
+
+                    <!-- Button HTML (to Trigger Modal) -->
+                    <a href="#myModal" class="trigger-btn btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+
+                    <!-- Modal HTML -->
+                    <div id="myModal" class="modal fade">
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="icon-box">
+                                        <i class="fa fa-times material-icons" aria-hidden="true"></i>
+                                    </div>
+                                    <h4 class="modal-title">Are you sure?</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 </div>
-                                <h4 class="modal-title">Are you sure?</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Do you really want to delete this property? This process cannot be undone.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <div class="modal-body">
+                                    <p>Do you really want to delete this property? This process cannot be undone.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
 </section>

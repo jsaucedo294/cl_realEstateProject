@@ -218,8 +218,17 @@ html, body {
         margin: 0;
     }
 
- /******** Delete Modal ********/
+.edit-and-delete-container {
+    display: flex;
+    justify-content: flex-start;
 
+}
+
+    .edit-and-delete-container .trigger-btn {
+        margin-right: 10px;
+    }
+
+/******** Delete Modal ********/
 .modal-confirm {
     color: #636363;
     width: 400px;

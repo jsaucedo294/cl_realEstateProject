@@ -154,7 +154,7 @@ namespace RealEstatePropertyShared.Models
 
         public double InitialRepair { get; set; } = 6000;
 
-        public double? COC => (Cashflow.Value / (Price.Value * DownPaymentPercentage + 6000));
+        public double? COC => (Cashflow.Value / (Price.Value * DownPaymentPercentage + InitialRepair));
         public string COCAsString
         {
             get
