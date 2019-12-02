@@ -10,7 +10,6 @@
 <section>
     <div class="container">
         <h1>Property Details</h1>
-
         <div class="swiper-container gallery-top">
             <div class="swiper-wrapper">
                 @if (Model.Images != null)
@@ -35,6 +34,7 @@
                         <div class="swiper-slide" style="background-image:url(@image)"></div>
                     }
                 }
+
             </div>
         </div>
 
@@ -177,7 +177,7 @@
                 @using (Html.BeginForm("EditProperty", "RealEstateProperties", FormMethod.Post))
                 {
                     <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#editModal" class="trigger-btn btn btn-info" data-toggle="modal"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    <a href="#editModal" class="trigger-btn btn btn-lg btn-info" data-toggle="modal"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
                     @Html.Partial("_EditForm", Model);
                 }
 
@@ -188,7 +188,7 @@
 
 
                     <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#myModal" class="trigger-btn btn btn-danger" data-toggle="modal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
+                    <a href="#myModal" class="trigger-btn btn btn-lg btn-danger" data-toggle="modal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a>
 
                     <!-- Modal HTML -->
                     <div id="myModal" class="modal fade">
@@ -220,11 +220,15 @@
 <!-- Swiper JS -->
 @Scripts.Render("~/Scripts/swiper.min.js")
 
+
 <!-- Initialize Swiper -->
 @section Scripts {
     <script type="text/javascript">
-
+        
         document.addEventListener("DOMContentLoaded", function (e) {
+        
+            
+            // Swipers Carousel
             var swipers = document.querySelectorAll(".swiper-container");
             if (swipers.length) {
                 var galleryThumbs = new Swiper('.gallery-thumbs', {
@@ -239,6 +243,7 @@
                 var galleryTop = new Swiper('.gallery-top', {
                     spaceBetween: 10,
                     loop: true,
+
                     loopedSlides: 5, //looped slides should be the same
                     navigation: {
                         nextEl: '.swiper-button-next',

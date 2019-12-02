@@ -19,14 +19,22 @@
                 </div>
                 <div class="property-card-info-bottom">
                     <h5>@Model.Street, @Model.City, @Model.State @Model.Zipcode</h5>
-                    <h5>NOI: @Model.NOIAsString</h5>
-                    <h5>Cap Rate: @Model.CapRateAsString</h5>
-                    <h5>Cashflow: @Model.CashflowAsString</h5>
-                    <h5>COC: @Model.COCAsString</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h5><i class="fa fa-university" aria-hidden="true"></i> NOI: @Model.NOIAsString</h5>
+                            <h5><i class="fa fa-balance-scale" aria-hidden="true"></i> Cap Rate: @Model.CapRateAsString</h5>
+                        </div>
+                        <div class="col-sm-6">
+                            <h5><i class="fa fa-money" aria-hidden="true"></i> Cashflow: @Model.CashflowAsString</h5>
+                            <h5><i class="fa fa-refresh" aria-hidden="true"></i> COC: @Model.COCAsString</h5>
+                        </div>
+                    </div>
                     <br />
-                    @Html.ActionLink("Details", "Details", new { zpid = Model.Zpid }, new { @class = "details-btn" })
+                    <div class="detail-btn-container">
+                        @Html.ActionLink("Details", "Details", new { zpid = Model.Zpid }, new { @class = "details-btn" })
+                    </div>
                     <br />
-                </div>
+                    </div>
 
             </div>
         </div>

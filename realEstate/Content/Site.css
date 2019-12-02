@@ -110,17 +110,26 @@ input.zipcode-input {
     align-self: flex-end;
 }
 .property-card-info-bottom {
-    padding: 10px 0;
+    padding: 10px 0 0;
 }
-    .details-btn {
-        background-color: #333;
-        border: solid 3px #333;
-        color: #fff;
-        padding: 10px 30px;
-        margin: 10px 0;
-        font-size: 1.5em;
-        transition: all .5s ease-in-out;
-    }
+
+.detail-btn-container {
+    width: 100%;
+    padding: 0;
+    margin:0;
+    display: flex;
+    justify-content: center;
+}
+
+.details-btn {
+    background-color: #333;
+    border: solid 3px #333;
+    color: #fff;
+    padding: 5px 50px;
+    margin: 0 0 -10px;
+    font-size: 1.5em;
+    transition: all .5s ease-in-out;
+}
 .details-btn:hover {
     text-decoration: none;
     color: #333;
@@ -164,11 +173,11 @@ html, body {
 
 .gallery-top {
     width: 100%;
-    height: 500px;
+    height: 80vh;
 }
 
 .gallery-thumbs {
-    height: 250px;
+    height: 40vh;
     box-sizing: border-box;
     padding: 10px 0;
 }
@@ -227,6 +236,7 @@ html, body {
     .edit-and-delete-container .trigger-btn {
         margin-right: 10px;
     }
+
 
 /******** Delete Modal ********/
 .modal-confirm {
