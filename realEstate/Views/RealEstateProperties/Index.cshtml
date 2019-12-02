@@ -6,16 +6,20 @@
     
     <section class="homepage-section-container">
    
+                
                 @using (Html.BeginForm("PropertiesForSale", "RealEstateProperties", FormMethod.Post))
                 {
-                    <div class="homepage-input-cta">
-                        <input type="text" name="input" class="zipcode-input" placeholder="Search by Zip Code">
-                        <div class="input-group-append">
-                            <button class="zipcode-btn" type="submit">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
+                    <div class="homepage-content-container">
+                        <h1><span>Invest</span> today or <br /><span>Regret</span> tomorrow</h1>
+                        <div class="homepage-input-cta">
+                            <input type="text" name="input" class="zipcode-input" placeholder="Search by Zip Code">
+                            <div class="input-group-append">
+                                <button class="zipcode-btn" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>  
+                    </div>
 
                 }
     </section>

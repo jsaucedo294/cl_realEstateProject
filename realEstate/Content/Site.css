@@ -24,6 +24,7 @@ body section {
 }
 
 /****** HOMEPAGE STYLES ******/
+
 .homepage-section-container {
     width: 100%;
     height: 100vh;
@@ -37,21 +38,53 @@ body section {
     overflow: hidden;
 }
 
-.homepage-input-cta {
+  .homepage-section-container::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0.6;
+        background: #000428; /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #004e92, #000428); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+.homepage-content-container {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+}
+.homepage-content-container h1 {
+    font-size: 2.3em;
+    color: #fff;
+    margin:0 0 20px;
+    padding: 0;
+    line-height: 1.5em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.homepage-content-container h1 span {
+        font-size: 2em;
+        font-weight: bold;
+}
+
+.homepage-input-cta {
     width: 600px;
     display: flex;
+    position: relative;
 }
 /****** INDEX INPUT & BTN ******/
 input.zipcode-input {
-    height: 65px;
+    height: 70px;
     width: 100% !important;
     padding-left: 20px;
     font-size: 1.5em;
+    border-radius: 5px;
 }
 .zipcode-btn {
     padding: 10px 10px;
