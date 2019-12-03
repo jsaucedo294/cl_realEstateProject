@@ -10,6 +10,16 @@ Website that allows users to view property deals and calculate what are the best
 * ASP.NET MVC for front end
 * Bootstrap for UI
 
+## How to make project work
+* Open Repository on browser https://github.com/jsaucedo294/cl_realEstateProject
+* Open Project in Visual Studio
+* Go to RealEstatePropertyShared > Data > API > APIKeysTemplates
+  * Rename "APIKeysTemplate" class to "APIKeys"
+  * Request keys from me or generate your own (AttomKey -> https://api.developer.attomdata.com/signup & ZillowKey -> https://www.zillow.com/howto/api/APIOverview.htm)
+  * Add given AttomKey & ZillowKey to APIKey class
+* Press F5 to run project
+* Open localhost page 
+
 ## Features
 
 * Current real estate data
@@ -27,7 +37,7 @@ Website that allows users to view property deals and calculate what are the best
   
 * Reports
   * Page to view report
-  * Pdf report of the property deal
+  * Pdf report of the property deal ++
 
 * Page to see property deals
   * Ability to filter between deals
