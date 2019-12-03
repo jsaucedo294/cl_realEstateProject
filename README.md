@@ -13,12 +13,13 @@ Website that allows users to view property deals and calculate what are the best
 ## How to make project work
 * Open Repository on browser https://github.com/jsaucedo294/cl_realEstateProject
 * Open Project in Visual Studio
-* Go to RealEstatePropertyShared > Data > API > APIKeysTemplates
+* Go to RealEstatePropertyShared > Data > API > APIKeysTemplate
   * Rename "APIKeysTemplate" class to "APIKeys"
   * Request keys from me or generate your own (AttomKey -> https://api.developer.attomdata.com/signup & ZillowKey -> https://www.zillow.com/howto/api/APIOverview.htm)
   * Add given AttomKey & ZillowKey to APIKey class
 * Press F5 to run project
-* Open localhost page 
+* Open localhost page
+* Type zipcode to search for properties for sale
 
 ## Features
 
