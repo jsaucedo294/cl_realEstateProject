@@ -110,6 +110,60 @@ namespace realEstate.Controllers
             _reiPropertiesRepository.Update(property);
             return RedirectToAction("ViewSavedProperties");
         }
+
+        public ActionResult FilteredProperties(int zipcode, double? priceRangeMin, int priceRangeMax, int bedroomsNum, int bathroomsNum, int sqrfLandMin, int sqrfLandMax ,int lotSizeMin, int lotSizeMax)
+        {
+            var propertiesList = _reiPropertiesRepository.GetList(zipcode);
+
+            var sortedList = propertiesList;
+
+            var sortedProperties = sortedList.AsQueryable();
+
+            if (priceRangeMin != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.Price >= priceRangeMin);
+            }
+
+            if (priceRangeMax != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.Price <= priceRangeMax);
+            }
+
+            if (bedroomsNum != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.Bedrooms >= bedroomsNum);
+            }
+
+            if (bathroomsNum != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.Bathrooms >= bathroomsNum);
+            }
+
+            if (sqrfLandMin != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.FinishedSqFt >= sqrfLandMin);
+            }
+
+            if (sqrfLandMax != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.FinishedSqFt <= sqrfLandMax);
+            }
+
+            if (lotSizeMin != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.LotSizeSqFt >= lotSizeMin);
+            }
+
+            if (lotSizeMax != 0)
+            {
+                sortedProperties = sortedProperties.Where(p => p.LotSizeSqFt <= lotSizeMax);
+            }
+
+
+            List<RealEstateProperty> properties = sortedProperties.OrderBy(p => p.Price).ToList();
+
+            return View("PropertiesForSale", properties);
+        }
         public ActionResult ViewSavedProperties()
         {
 

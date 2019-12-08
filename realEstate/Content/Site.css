@@ -371,6 +371,16 @@ html, body {
     display: inline-block;
     margin: 100px auto;
 }
+/********* FILTER MODAL ********/
+.filter-container form {
+    display: flex;
+    justify-content: flex-end;
+   
+}
+.trigger-btn {
+    margin: 20px;
+    text-align: end;
+}
 
 /***** Saved Properties Page*****/
 .no-properties-message {

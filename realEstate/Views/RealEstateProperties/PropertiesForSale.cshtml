@@ -11,9 +11,19 @@
 {
     <section>
         <div class="container">
+
             <h2>@ViewBag.Title</h2>
             <div class="row">
-                
+                <div class="filter-container">
+                    @using (Html.BeginForm("FilteredProperties", "RealEstateProperties", FormMethod.Post))
+                    {
+                        <!-- Button HTML (to Trigger Modal) -->
+                        <a href="#filterModal" class="trigger-btn btn btn-lg btn-info" data-toggle="modal">
+                            <i class="fa fa-filter" aria-hidden="true"></i> Filter
+                        </a>
+                        @Html.Partial("_PropertyFilter", Model);
+                    }
+                </div>
                 @{
                     var sortedProperties = Model.Where(p => p.Price != 0).OrderByDescending(p => p.CapRate);
 
