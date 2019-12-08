@@ -1,5 +1,5 @@
 ﻿@model List<RealEstatePropertyShared.Models.RealEstateProperty>
-@using  System.Globalization;
+@using System.Globalization;
 
 @{
     ViewBag.Title = "Properties For Sale";
@@ -7,21 +7,30 @@
 }
 
 
+@if (Model.Count > 0)
+{
+    <section>
+        <div class="container">
+            <h2>@ViewBag.Title</h2>
+            <div class="row">
+                
+                @{
+                    var sortedProperties = Model.Where(p => p.Price != 0).OrderByDescending(p => p.CapRate);
 
-<section>
-    <div class="container">
-        <h2>@ViewBag.Title</h2>
-        <div class="row">
+                }
+                @foreach (var property in sortedProperties)
+                {
+                    @Html.Partial("_RealEstateProperty", property);
+                }
 
-            @{
-                var sortedProperties = Model.Where(p => p.Price != 0).OrderByDescending(p => p.CapRate);
-
-            }
-            @foreach (var property in sortedProperties)
-            {
-                @Html.Partial("_RealEstateProperty", property);
-            }
-
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+}
+else
+{
+<div class="no-properties-message">
+    <i class="fa fa-frown-o" aria-hidden="true"></i>
+    <h1>No Properties have been found</h1>
+</div>
+}

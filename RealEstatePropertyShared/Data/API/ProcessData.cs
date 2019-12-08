@@ -71,7 +71,8 @@ namespace RealEstatePropertyShared.Data
                 }
                 else
                 {
-                    throw new Exception(response.ReasonPhrase);
+                    var noAddressesReturn = new List<Dictionary<string, string>>();
+                    return noAddressesReturn;
                 }
             }
 

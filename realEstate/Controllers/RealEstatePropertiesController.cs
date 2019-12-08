@@ -32,41 +32,56 @@ namespace realEstate.Controllers
             var regEx = new Regex(pattern);
 
             MatchCollection matchedZipcode = regEx.Matches(input);
-            var zipCodeValue = matchedZipcode[0].Value;
-
-
-            if (zipCodeValue == "" || zipCodeValue == null)
-            {
-                var propertiesList = _reiPropertiesRepository.GetList();
-                return View(propertiesList);
-            }
-
-
-            var propertiesByZipcode = _reiPropertiesRepository.GetList(int.Parse(zipCodeValue));
-
-            if (propertiesByZipcode.Count <= 3)
+            if (!string.IsNullOrEmpty(input) && matchedZipcode.Count > 0)
             {
 
-                // GET DATA FROM API
-                var listOfAddresses = ProcessData.GetListOfAddresses(zipCodeValue);
-                var getZpidAndPrices = ProcessData.GetZpidAndPrices(listOfAddresses);
-                var propertiesList = ProcessData.GetPropertiesDetailsForSale(getZpidAndPrices);
+                
 
-                foreach (var property in propertiesList)
+                var zipCodeValue = matchedZipcode[0].Value;
+
+
+
+                if (zipCodeValue == "" || zipCodeValue == null)
                 {
-                    if (!_reiPropertiesRepository.doesExist(property.Zpid))
-                    {
-                        _reiPropertiesRepository.Add(property);
-                    }
+                    var propertiesList = _reiPropertiesRepository.GetList();
+                    return View(propertiesList);
                 }
 
-                var propertiesByZipcode2 = _reiPropertiesRepository.GetList(int.Parse(zipCodeValue));
-                return View(propertiesByZipcode2);
 
+                var propertiesByZipcode = _reiPropertiesRepository.GetList(int.Parse(zipCodeValue));
+
+                if (propertiesByZipcode.Count <= 3)
+                {
+
+                    // GET DATA FROM API
+                    var listOfAddresses = ProcessData.GetListOfAddresses(zipCodeValue);
+                    if (listOfAddresses.Count > 0 )
+                    { 
+                        var getZpidAndPrices = ProcessData.GetZpidAndPrices(listOfAddresses);
+                        var propertiesList = ProcessData.GetPropertiesDetailsForSale(getZpidAndPrices);
+
+                        foreach (var property in propertiesList)
+                        {
+                            if (!_reiPropertiesRepository.doesExist(property.Zpid))
+                            {
+                                _reiPropertiesRepository.Add(property);
+                            }
+                        }
+
+                    }
+                    var propertiesByZipcode2 = _reiPropertiesRepository.GetList(int.Parse(zipCodeValue));
+                    return View(propertiesByZipcode2);
+
+                }
+                else
+                {
+                    return View(propertiesByZipcode);
+                }
             }
             else
             {
-                return View(propertiesByZipcode);
+                var propertiesList = new List<RealEstateProperty>();
+                return View(propertiesList);
             }
 
         }
