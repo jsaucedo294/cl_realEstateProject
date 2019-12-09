@@ -25,6 +25,7 @@ namespace realEstate.Controllers
 
             return View();
         }
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult PropertiesForSale(string input)
         {

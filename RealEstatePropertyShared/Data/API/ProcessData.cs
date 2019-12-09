@@ -170,8 +170,13 @@ namespace RealEstatePropertyShared.Data
                             var xmlNode = new XmlDocument();
                             xmlNode.LoadXml(xmlResponse);
                             var jsonText = JsonConvert.SerializeXmlNode(xmlNode);
-                            var reiProperty = JsonConvert.DeserializeObject<REIProperty>(jsonText);
+                            
+                            if (!xmlResponse.Contains("<count>1</count>"))
+                            {
 
+                            
+                            var reiProperty = JsonConvert.DeserializeObject<REIProperty>(jsonText);
+                            
                             var amount = 0.0;
                             var price = 0.0;
                             if (double.TryParse(firstResult.zestimate.amount.text, out amount))
@@ -179,71 +184,75 @@ namespace RealEstatePropertyShared.Data
                                  price = amount;
                             }
 
+                            if (reiProperty.UpdatedPropertyDetails.response != null)
+                            { 
 
-                            var images = reiProperty.UpdatedPropertyDetails.response.images?.image.url;
-                            List<string> defaultImage = new List<string>() { "/Content/Images/No_photos_available.png" };
+                                var images = reiProperty.UpdatedPropertyDetails.response.images?.image.url;
+                                List<string> defaultImage = new List<string>() { "/Content/Images/No_photos_available.png" };
 
-                            //TODO: Images are not being added to RealEstateProperty Model.
-                            // check -> https://stackoverflow.com/questions/20711986/entity-framework-code-first-cant-store-liststring 
+                                //TODO: Images are not being added to RealEstateProperty Model.
+                                // check -> https://stackoverflow.com/questions/20711986/entity-framework-code-first-cant-store-liststring 
                             
 
-                            var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.zpid);
+                                var zpid = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response?.zpid);
                             
-                            var street = reiProperty.UpdatedPropertyDetails.response.address.street;
-                            var city = reiProperty.UpdatedPropertyDetails.response.address.city;
-                            var state = reiProperty.UpdatedPropertyDetails.response.address.state;
-                            var zipcodeAdded = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.address.zipcode);
-                            var latitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.latitude);
-                            var longitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.longitude);
-                            var propertyType = reiProperty.UpdatedPropertyDetails.response.editedFacts.useCode;
-                            var bedrooms = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.bedrooms);
-                            var bathdrooms = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.bathrooms);
-                            var finishedSqFt = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.finishedSqFt);
-                            var lotSizeSqFt = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.lotSizeSqFt);
-                            var numRooms = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.numRooms);
-                            var roof = reiProperty.UpdatedPropertyDetails.response.editedFacts.roof;
-                            var exteriorMaterial = reiProperty.UpdatedPropertyDetails.response.editedFacts.exteriorMaterial;
-                            var parkingType = reiProperty.UpdatedPropertyDetails.response.editedFacts.parkingType;
-                            var heatingSystem = reiProperty.UpdatedPropertyDetails.response.editedFacts.heatingSystem;
-                            var coolingSystem = reiProperty.UpdatedPropertyDetails.response.editedFacts.coolingSystem;
-                            var floorCovering = reiProperty.UpdatedPropertyDetails.response.editedFacts.floorCovering;
-                            var architecture = reiProperty.UpdatedPropertyDetails.response.editedFacts.architecture;
-                            var basement = reiProperty.UpdatedPropertyDetails.response.editedFacts.basement;
-                            var numFloors = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.numFloors);
-                            var homeDescription = reiProperty.UpdatedPropertyDetails.response.homeDescription;
+                                var street = reiProperty.UpdatedPropertyDetails.response.address.street;
+                                var city = reiProperty.UpdatedPropertyDetails.response.address.city;
+                                var state = reiProperty.UpdatedPropertyDetails.response.address.state;
+                                var zipcodeAdded = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.address.zipcode);
+                                var latitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.latitude);
+                                var longitude = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.address.longitude);
+                                var propertyType = reiProperty.UpdatedPropertyDetails.response.editedFacts.useCode;
+                                var bedrooms = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.bedrooms);
+                                var bathdrooms = checkIfCorrectDoubleInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.bathrooms);
+                                var finishedSqFt = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.finishedSqFt);
+                                var lotSizeSqFt = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.lotSizeSqFt);
+                                var numRooms = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.numRooms);
+                                var roof = reiProperty.UpdatedPropertyDetails.response.editedFacts.roof;
+                                var exteriorMaterial = reiProperty.UpdatedPropertyDetails.response.editedFacts.exteriorMaterial;
+                                var parkingType = reiProperty.UpdatedPropertyDetails.response.editedFacts.parkingType;
+                                var heatingSystem = reiProperty.UpdatedPropertyDetails.response.editedFacts.heatingSystem;
+                                var coolingSystem = reiProperty.UpdatedPropertyDetails.response.editedFacts.coolingSystem;
+                                var floorCovering = reiProperty.UpdatedPropertyDetails.response.editedFacts.floorCovering;
+                                var architecture = reiProperty.UpdatedPropertyDetails.response.editedFacts.architecture;
+                                var basement = reiProperty.UpdatedPropertyDetails.response.editedFacts.basement;
+                                var numFloors = checkIfCorrectNumberInput(reiProperty.UpdatedPropertyDetails.response.editedFacts.numFloors);
+                                var homeDescription = reiProperty.UpdatedPropertyDetails.response.homeDescription;
 
-                            RealEstateProperty _property = new RealEstateProperty()
-                            {
-                                Zpid = zpid,
-                                Street = street,
-                                City = city,
-                                State = state,
-                                Zipcode = zipcodeAdded,
-                                Latitude = latitude,
-                                Longitude = longitude,
-                                Price = price,
-                                PropertyType = propertyType,
-                                Bedrooms = bedrooms,
-                                Bathrooms = bathdrooms,
-                                FinishedSqFt = finishedSqFt,
-                                LotSizeSqFt = lotSizeSqFt,
-                                NumRooms = numRooms,
-                                Roof = roof,
-                                ExterialMaterial = exteriorMaterial,
-                                ParkingType = parkingType,
-                                HeatingSystem = heatingSystem,
-                                CoolingSystem = coolingSystem,
-                                FloorCovering = floorCovering,
-                                Architecture = architecture,
-                                Basement = basement,
-                                Appliances = reiProperty.UpdatedPropertyDetails.response.editedFacts.appliances,
-                                NumFloors = numFloors,
-                                Images = ((images == null) ? defaultImage : images),
-                                HomeDescription = homeDescription
-                            };
+                                RealEstateProperty _property = new RealEstateProperty()
+                                {
+                                    Zpid = zpid,
+                                    Street = street,
+                                    City = city,
+                                    State = state,
+                                    Zipcode = zipcodeAdded,
+                                    Latitude = latitude,
+                                    Longitude = longitude,
+                                    Price = price,
+                                    PropertyType = propertyType,
+                                    Bedrooms = bedrooms,
+                                    Bathrooms = bathdrooms,
+                                    FinishedSqFt = finishedSqFt,
+                                    LotSizeSqFt = lotSizeSqFt,
+                                    NumRooms = numRooms,
+                                    Roof = roof,
+                                    ExterialMaterial = exteriorMaterial,
+                                    ParkingType = parkingType,
+                                    HeatingSystem = heatingSystem,
+                                    CoolingSystem = coolingSystem,
+                                    FloorCovering = floorCovering,
+                                    Architecture = architecture,
+                                    Basement = basement,
+                                    Appliances = reiProperty.UpdatedPropertyDetails.response.editedFacts.appliances,
+                                    NumFloors = numFloors,
+                                    Images = ((images == null) ? defaultImage : images),
+                                    HomeDescription = homeDescription
+                                };
 
-                            //TODO: Only add RealEstatePropery when is not in database
-                            properties.Add(_property);
+                                //TODO: Only add RealEstatePropery when is not in database
+                                properties.Add(_property);
+                            }
+                            }
                         }
                     }
                     else
