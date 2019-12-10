@@ -171,6 +171,7 @@ namespace RealEstatePropertyShared.Data
                             xmlNode.LoadXml(xmlResponse);
                             var jsonText = JsonConvert.SerializeXmlNode(xmlNode);
                             
+                            // Check if property has only 1 image
                             if (!xmlResponse.Contains("<count>1</count>"))
                             {
 

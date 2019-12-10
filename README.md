@@ -6,6 +6,7 @@ Website that allows users to view property deals and calculate what are the best
 ## Technical Summary
 
 * C#
+* SQL Express
 * Entity Framework for Database
 * ASP.NET MVC for front end
 * Bootstrap for UI
@@ -17,6 +18,7 @@ Website that allows users to view property deals and calculate what are the best
   * Rename "APIKeysTemplate" class to "APIKeys"
   * Request keys from me or generate your own (AttomKey -> https://api.developer.attomdata.com/signup & ZillowKey -> https://www.zillow.com/howto/api/APIOverview.htm)
   * Add given AttomKey & ZillowKey to APIKey class
+![add-api-keys](https://raw.githubusercontent.com/jsaucedo294/cl_realEstateProject/master/realEstate/Content/Images/add_api_keys.png)
 * Press F5 to run project
 * Open localhost page
 * Type zipcode to search for properties for sale
